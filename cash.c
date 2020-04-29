@@ -28,19 +28,19 @@ do
         counter++;
     }
 
-    if (remainder - 10 > -1) // Dimes
+    else if (remainder - 10 > -1) // Dimes
     {
         remainder = remainder - 10;
         counter++;
     }
 
-    if (remainder - 5 > -1) // Nickels
+    else if (remainder - 5 > -1) // Nickels
     {
         remainder = remainder - 5;
         counter++;
     }
 
-    if (remainder - 1 > -1) // Pennies
+    else if (remainder - 1 > -1) // Pennies
     {
         remainder = remainder - 1;
         counter++;
