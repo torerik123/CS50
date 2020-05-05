@@ -18,10 +18,24 @@ int main(void)
     int product = 0;
     int x = 0;
     int y = 0;
-    int sum = 0;                //sum of the total modulo of the two do/while loops
-    long cardcheck = number;    //Used for counting length number
-    int counter = 0;            //Used for counting length number
+    int sum = 0;                        //sum of the total modulo of the two do/while loops
+    long cardcheck = number;            //Used for counting length number
+    int counter = 0;                    //Used for counting length number
     long startingnumber = number;
+
+
+                                        // Counts the length of the number entered by the user
+        while (cardcheck != 0)
+                {
+                    cardcheck /= 10;        // Divides by 10
+                    counter++;              //increments counter by 1
+                }
+
+
+
+
+
+
 
 
         do                          //This adds the digits that were not multiplied by 2
@@ -65,15 +79,9 @@ int main(void)
 
     sum = multi + single;
 
-    //  Counts the length of the number if the total modulo is congruent to 10, aka the number ends with zero
+    //  Executes if the total modulo is congruent to 10, aka the number ends with zero
     if (sum % 10 == 0)
         {
-            while (cardcheck != 0)
-                {
-                    cardcheck /= 10;                                // Divides by 10
-                    counter++;                               //increments counter by 1
-                }
-
 
             //  VISA: 13 or 16 digits, Starts with 4
             if ((counter == 16 | counter == 13) && (startingnumber / 1000000000000000 == 4 | startingnumber / 1000000000000 == 4))
@@ -90,12 +98,13 @@ int main(void)
             printf("MASTERCARD\n");
 
             else
-                {
-                    printf("INVALID\n");
-                }
+            printf("INVALID\n");
 
         }
 
-
+    else
+                {
+                    printf("INVALID\n");
+                }
 
 }
