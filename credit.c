@@ -23,21 +23,14 @@ int main(void)
     int counter = 0;            //Used for counting length number
     long startingnumber = number;
 
-        //TODO: Multiply every other digit by 2, starting with the number’s second-to-last digit, and then add those products’ digits together.
 
-        do //This adds the digits that were not multiplied by 2
+        do                          //This adds the digits that were not multiplied by 2
         {
+            slice = slice/10;           // 1. Slice off the last number using %
+            remainder = slice % 10;     // 2. Find remainder
+            doubled = remainder * 2;    // 3. Multiply remainder by 2
 
-            // 1. Slice off the last number using %
-            slice = slice/10;
-
-            // 2. Find remainder
-            remainder = slice % 10;
-
-            // 3. Multiply remainder by 2
-            doubled = remainder * 2;
-
-            if (doubled >= 10) // adds the numbers in doubled together if the result is more than 10
+            if (doubled >= 10)          // Adds the numbers in doubled together if the result is more than 10
                 {
                     x = doubled % 10;
                     y = doubled / 10;
@@ -61,10 +54,10 @@ int main(void)
 
 
 
-        do //This adds the digits that were not multiplied by 2
+        do                                  //This adds the digits that were not multiplied by 2
         {
-            single = single + (number % 10);  //Finds the last digit of number
-            number = number / 100;      //Divides by 100 to get to the next number to add to sum
+            single = single + (number % 10);    //Finds the last digit of number
+            number = number / 100;              //Divides by 100 to get to the next number to add to sum
 
         }
 
@@ -96,12 +89,13 @@ int main(void)
             startingnumber /  100000000000000 == 53 | startingnumber /  100000000000000 == 54 | startingnumber /  100000000000000 == 55 ))
             printf("MASTERCARD\n");
 
+            else
+                {
+                    printf("INVALID\n");
+                }
 
         }
 
-    else
-        {
-            printf("INVALID\n");
-        }
+
 
 }
