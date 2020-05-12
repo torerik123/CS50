@@ -47,7 +47,7 @@ int main (int argc, string argv[])  //User provides command line argument with w
         //  Create array for ciphertext
         string ciphertext[length];
 
-        printf("Ciphertext:");
+        printf("Ciphertext: ");
 
             //  Iterate over each character of the plaintext:   TODO: Add ciphertext to array
             for (int i = 0; i < length; i++)
