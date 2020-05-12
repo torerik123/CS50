@@ -11,7 +11,7 @@ int main (int argc, string argv[])  //User provides command line argument with w
     if (argv[2] != 0)
     {
         printf("Usage: ./caesar key\n");
-        //Return 1 signalling error
+        return 1;
     }
 
 
