@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-int main (int argc, string argv[])  //User provides command line argument with what the key should be in the secret message.
+int main(int argc, string argv[])       //User provides command line argument with what the key should be in the secret message.
 {
 
     //  Check that program was run with one command-line argument
@@ -21,9 +21,9 @@ int main (int argc, string argv[])  //User provides command line argument with w
     {
         int n = strlen(argv[1]);
 
-        for (int i = 0; i < n; i++ ) // Checks if user input is all digits.
+        for (int i = 0; i < n; i++)     // Checks if user input is all digits.
         {
-            if (isdigit(argv[1][i])) // Executes if i is a number
+            if (isdigit(argv[1][i]))    // Executes if i is a number
             {
 
             }
@@ -31,7 +31,7 @@ int main (int argc, string argv[])  //User provides command line argument with w
             else
             {
                 printf("Usage: ./caesar key\n");
-                return 1;                               //  returns an error and terminates program
+                return 1;                               //  Returns an error and terminates program
 
             }
         }
@@ -49,36 +49,35 @@ int main (int argc, string argv[])  //User provides command line argument with w
 
         printf("ciphertext: ");
 
-            //  Iterate over each character of the plaintext:   TODO: Add ciphertext to array
-            for (int i = 0; i < length; i++)
-                if (isalpha(plaintext[i]))                  // Checks if plaintext is an alphabetic character
+        //  Iterates over each character of the plaintext:
+        for (int i = 0; i < length; i++)
+            if (isalpha(plaintext[i]))                  // Checks if plaintext is an alphabetic character
+            {
+                if (isupper(
+                        plaintext[i]))                  //  If it is an uppercase letter, rotate it, preserving case, then print out the rotated character,     ASCII 65-90
                 {
-                    if (isupper(plaintext[i]))              //  If it is an uppercase letter, rotate it, preserving case, then print out the rotated character,     ASCII 65-90
-                    {
-
-                        int upper = plaintext[i] - 65;          //  Subract 65 to make alphabetical index starting from zero
-                        int c = (upper + key) % 26;             //  Wrap around to beginning of index
-                        c = c + 65;                             //  Add 65 to convert back to ASCII
-                        printf("%c", (char)c);                  //  Print ciphertext character
-
-                    }
-
-
-                    else if (islower(plaintext[i]))         //  If it is a lowercase letter, rotate it, preserving case, then print out the rotated character,  ASCI 97-122
-                    {
-                        int upper = plaintext[i] - 97;          //  Subract 97 to make alphabetical index starting from zero
-                        int c = (upper + key) % 26;             //  Wrap around to beginning of index
-                        c = c + 97;                             //  Add 97 to convert back to ASCII
-                        printf("%c", (char)c);                  //  Print ciphertext character
-                    }
-
+                    int upper = plaintext[i] - 65;          //  Subract 65 to make alphabetical index starting from zero
+                    int c = (upper + key) % 26;             //  Wrap around to beginning of index
+                    c = c + 65;                             //  Add 65 to convert back to ASCII
+                    printf("%c", (char)c);                  //  Print ciphertext character
                 }
+
+
+                else if (islower(
+                             plaintext[i]))             //  If it is a lowercase letter, rotate it, preserving case, then print out the rotated character,  ASCI 97-122
+                {
+                    int upper = plaintext[i] - 97;          //  Subract 97 to make alphabetical index starting from zero
+                    int c = (upper + key) % 26;             //  Wrap around to beginning of index
+                    c = c + 97;                             //  Add 97 to convert back to ASCII
+                    printf("%c", (char)c);                  //  Print ciphertext character
+                }
+            }
                 
-                else if (ispunct(plaintext[i]) || isspace(plaintext[i]))             //  If it is neither, print out the character as is
-                {
-                    printf("%c", plaintext[i]);
-                }
-            printf("\n");                                   //  Print a newline
+            else if (ispunct(plaintext[i]) || isspace(plaintext[i]))             //  If it is neither, print out the character as is
+            {
+                printf("%c", plaintext[i]);
+            }
+        printf("\n");                                                           //  Print a newline
 
 
 
