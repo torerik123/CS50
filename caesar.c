@@ -74,7 +74,7 @@ int main (int argc, string argv[])  //User provides command line argument with w
 
                 }
                 
-                else if (ispunct(plaintext[i]))             //  If it is neither, print out the character as is
+                else if (ispunct(plaintext[i]) || isspace(plaintext[i]))             //  If it is neither, print out the character as is
                 {
                     printf("%c", plaintext[i]);
                 }
