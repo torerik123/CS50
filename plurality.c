@@ -74,7 +74,7 @@ bool vote(string name)
             return true;
         }
 
-    //If name does not match the name of any of the candidates in the election, no vote totals should change, and the vote function should return false to indicate an invalid ballot.
+    //  If name does not match the name of any of the candidates in the election, no vote totals should change, and the vote function should return false to indicate an invalid ballot.
     return false;
 
 }
@@ -97,9 +97,12 @@ void print_winner(void)
     for (int i = 0; i < candidate_count; i++)
     {
         if (candidates[i].votes == max_vote)
-        printf("%s\n", candidates[i].name);
+        {
+            printf("%s\n", candidates[i].name);    
+        }
+        
     }
     
-    return;
+    
 }
 
