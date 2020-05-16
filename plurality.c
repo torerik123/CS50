@@ -97,7 +97,7 @@ void print_winner(void)
     for (int i = 0; i < candidate_count; i++)
     {
         if (candidates[i].votes == max_vote)
-        printf("%s \n", candidates[i].name);
+        printf("%s\n", candidates[i].name);
     }
     
     return;
