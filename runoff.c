@@ -129,19 +129,17 @@ int main(int argc, string argv[])
 bool vote(int voter, int rank, string name)
 {
     for (int i = 0; i < candidate_count; i++)
+    {
+        if (strcmp(name, candidates[i].name) == 0)          //  Compare user vote with names of candidates
         {
-            if (strcmp(name, candidates[i].name) == 0)          //  Compare user vote with names of candidates
+            for (int j = 0; i < candidate_count; i++)       //  Update preferences array
             {
-                for (int j = 0; i < candidate_count; i++)       //  Update preferences array to indicate that voter[i] that candidate[i] as their rank[j]
-                {
-                    preferences[voter][rank] = i;               //  Updates array with voter and rank for candidate i
-                    break;
-                }
-                    
-                 return true;
+                preferences[voter][rank] = i;               //  Updates array with voter and rank for candidate i
+                break;
             }
+            return true;
         }
-
+    }
     return false;
 }
 
@@ -149,16 +147,16 @@ bool vote(int voter, int rank, string name)
 void tabulate(void)
 {
     // The function should update the number of votes each candidate has at this stage in the runoff.
-    for (int i = 0; i < voter_count;i++)
+    for (int i = 0; i < voter_count; i++)
     {
-            for (int j = 0; j < candidate_count;j++)
-            {
-                if (candidates[preferences[i][j]].eliminated == false)  //  If candidate is not eliminated:
-                {   
-                    candidates[preferences[i][j]].votes += 1;           //  Update number of votes by 1
-                    break;
-                }
+        for (int j = 0; j < candidate_count; j++)
+        {
+            if (candidates[preferences[i][j]].eliminated == false)  //  If candidate is not eliminated:
+            {   
+                candidates[preferences[i][j]].votes += 1;           //  Update number of votes by 1
+                break;
             }
+        }
     }
     return;
 }
@@ -167,7 +165,7 @@ void tabulate(void)
 bool print_winner(void)
 {
     //  If any candidate has more than half of the vote, their name should be printed to stdout and the function should return true.
-    for (int i = 0; i < candidate_count;i++)
+    for (int i = 0; i < candidate_count; i++)
     {   
         string most = candidates[i].name;
         if (candidates[i].votes > voter_count / 2)
@@ -185,15 +183,15 @@ int find_min(void)
 {
     int min = voter_count;                          // Sets min to the total number of voters
     for (int i = 0; i < candidate_count; i++)
-       {
-            if (candidates[i].eliminated == false   // Executes if candidate is not eliminated and has less votes than min
+    {
+        if (candidates[i].eliminated == false   // Executes if candidate is not eliminated and has less votes than min
             && candidates[i].votes < min)
-            {
-                min = candidates[i].votes;          //  Updates min to the number of votes candidate[i] has
+        {
+            min = candidates[i].votes;          //  Updates min to the number of votes candidate[i] has
                 
-            }   
-       }
-       return min;
+        }   
+    }
+    return min;
     
 }
 
@@ -202,7 +200,8 @@ bool is_tie(int min)
 {
     for (int i = 0; i < candidate_count; i++)
     {
-        if (candidates[i].eliminated == false && candidates[i].votes != min)    //  Returns false if candidate is not eliminated or has more votes than min
+        if (candidates[i].eliminated == false 
+            && candidates[i].votes != min)    //  Returns false if candidate is not eliminated or has more votes than min
         {
             return false;
         }
@@ -213,7 +212,7 @@ bool is_tie(int min)
 // Eliminate the candidate (or candidiates) in last place
 void eliminate(int min)
 {
-    for (int i = 0; i < candidate_count;i++)
+    for (int i = 0; i < candidate_count; i++)
     {
         if (candidates[i].votes == min)         // If the candidate has minimum number of votes, the candidate is eliminated
         {
