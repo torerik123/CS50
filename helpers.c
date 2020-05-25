@@ -15,12 +15,12 @@ void grayscale(int height, int width, RGBTRIPLE image[height][width])
                 average = (image[i][j].rgbtRed + image[i][j].rgbtGreen + image[i][j].rgbtBlue) / 3;
                 
                 //  Round to nearest int    
-                average = round(average);
+                //average = round(average);
                 
                 //  Set all values to the average
-                image[i][j].rgbtRed = average;
-                image[i][j].rgbtGreen = average;
-                image[i][j].rgbtBlue = average;
+                image[i][j].rgbtRed = round(average);
+                image[i][j].rgbtGreen = round(average);
+                image[i][j].rgbtBlue = round(average);
                 
             }
         }
