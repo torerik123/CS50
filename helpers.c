@@ -80,15 +80,14 @@ void reflect(int height, int width, RGBTRIPLE image[height][width])
         //  Loop through each pixel in row up to the middle pixel ( == width/2)
         for (int j = 0; j < (width / 2); j++)
         {
-            
             // Copy to temporary array
             swap[i][j] = image[i][j];
             
             //  Swap i with value on opposite side
-            image[i][j] = image[i][width - j];
+            image[i][j] = image[i][width - 1 - j];
             
             //  Swap temp value with value on opposite side
-            image[i][width - j] = swap[i][j];
+            image[i][width - 1 - j] = swap[i][j];
            
         }
     }
