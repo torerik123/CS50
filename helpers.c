@@ -131,8 +131,8 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
 
             int pixelcount = 0;
 
-            //  Check if pixels exist
-
+            //  Check if pixels in grid exist
+            
             if (i >= 0 && j >= 0)
             {
                 redSum += blurimage[i][j].rgbtRed;
@@ -140,66 +140,69 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
                 blueSum += blurimage[i][j].rgbtBlue;
                 pixelcount++;
             }
-
+            
             if (i >= 0 && j - 1 >= 0)
             {
-                redSum += blurimage[i][j-1].rgbtRed;
-                greenSum += blurimage[i][j-1].rgbtGreen;
-                blueSum += blurimage[i][j-1].rgbtBlue;
+                redSum += blurimage[i][j - 1].rgbtRed;
+                greenSum += blurimage[i][j - 1].rgbtGreen;
+                blueSum += blurimage[i][j - 1].rgbtBlue;
                 pixelcount++;
             }
-
+            
             if ((i >= 0 && j + 1 >= 0) && (i >= 0 && j + 1 < width))
             {
-                redSum += blurimage[i][j+1].rgbtRed;
-                greenSum += blurimage[i][j+1].rgbtGreen;
-                blueSum += blurimage[i][j+1].rgbtBlue;
+                redSum += blurimage[i][j + 1].rgbtRed;
+                greenSum += blurimage[i][j + 1].rgbtGreen;
+                blueSum += blurimage[i][j + 1].rgbtBlue;
                 pixelcount++;
             }
+            
             if (i - 1 >= 0 && j >= 0)
             {
-                redSum += blurimage[i-1][j].rgbtRed;
-                greenSum += blurimage[i-1][j].rgbtGreen;
-                blueSum += blurimage[i-1][j].rgbtBlue;
+                redSum += blurimage[i - 1][j].rgbtRed;
+                greenSum += blurimage[i - 1][j].rgbtGreen;
+                blueSum += blurimage[i - 1][j].rgbtBlue;
                 pixelcount++;
             }
+            
             if (i - 1 >= 0 && j - 1 >= 0)
             {
-                redSum += blurimage[i-1][j-1].rgbtRed;
-                greenSum += blurimage[i-1][j-1].rgbtGreen;
-                blueSum += blurimage[i-1][j-1].rgbtBlue;
+                redSum += blurimage[i - 1][j - 1].rgbtRed;
+                greenSum += blurimage[i - 1][j - 1].rgbtGreen;
+                blueSum += blurimage[i - 1][j - 1].rgbtBlue;
                 pixelcount++;
             }
-
+            
             if ((i - 1 >= 0 && j + 1 >= 0) && (i - 1 >= 0 && j + 1 < width))
             {
-                redSum += blurimage[i-1][j+1].rgbtRed;
-                greenSum += blurimage[i-1][j+1].rgbtGreen;
-                blueSum += blurimage[i-1][j+1].rgbtBlue;
+                redSum += blurimage[i - 1][j + 1].rgbtRed;
+                greenSum += blurimage[i - 1][j + 1].rgbtGreen;
+                blueSum += blurimage[i - 1][j + 1].rgbtBlue;
                 pixelcount++;
             }
 
+            
             if ((i + 1 >= 0 && j >= 0) && (i + 1 < height && j >= 0))
             {
-                redSum += blurimage[i+1][j].rgbtRed;
-                greenSum += blurimage[i+1][j].rgbtGreen;
-                blueSum += blurimage[i+1][j].rgbtBlue;
+                redSum += blurimage[i + 1][j].rgbtRed;
+                greenSum += blurimage[i + 1][j].rgbtGreen;
+                blueSum += blurimage[i + 1][j].rgbtBlue;
                 pixelcount++;
             }
 
             if ((i + 1 >= 0 && j - 1 >= 0) && (i + 1 < height && j - 1 >= 0))
             {
-                redSum += blurimage[i+1][j-1].rgbtRed;
-                greenSum += blurimage[i+1][j-1].rgbtGreen;
-                blueSum += blurimage[i+1][j-1].rgbtBlue;
+                redSum += blurimage[i + 1][j - 1].rgbtRed;
+                greenSum += blurimage[i + 1][j - 1].rgbtGreen;
+                blueSum += blurimage[i + 1][j - 1].rgbtBlue;
                 pixelcount++;
             }
 
             if ((i + 1 >= 0 && j + 1 >= 0) && (i + 1 < height && j + 1 < width))
             {
-                redSum += blurimage[i+1][j+1].rgbtRed;
-                greenSum += blurimage[i+1][j+1].rgbtGreen;
-                blueSum += blurimage[i+1][j+1].rgbtBlue;
+                redSum += blurimage[i + 1][j + 1].rgbtRed;
+                greenSum += blurimage[i + 1][j + 1].rgbtGreen;
+                blueSum += blurimage[i + 1][j + 1].rgbtBlue;
                 pixelcount++;
             }
             
