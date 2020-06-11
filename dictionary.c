@@ -3,8 +3,8 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <strings.h>
 #include <string.h>
-
 #include "dictionary.h"
 
 // Represents a node in a hash table
@@ -21,23 +21,46 @@ const unsigned int N = 26;
 // Hash table
 node *table[N];
 
+// Wordcount
+int wordcount = 0;
+
 // Returns true if word is in dictionary else false
 bool check(const char *word)
 {
-    // TODO
+    //  Hash word
+    int hashvalue = hash(word);
+
+    //  Access linked list at table[hashvalue]
+    node *linkedlist = table[hashvalue];
+    
+    //Traverse linked list
+    //Set cursor to first item in table[hashvalue]
+    node *cursor = &linkedlist[0];
+    
+    //Keep moving until cursor == NULL
+    while (cursor != NULL)
+    {
+        if (strcasecmp(cursor->word, word) != 0)
+        {
+            return true;
+        }
+        cursor = cursor->next;
+    }
     return false;
 }
 
 // Hashes word to a number
+// djb2 hash function from http://www.cse.yorku.ca/~oz/hash.html
+
 unsigned int hash(const char *word)
 {
     unsigned int hash = 5381;
     int c = 0;
-        
-    while (c == *word++)
+
+    while ((c = *word++))
         hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
 
-    return hash % 26;
+    return hash % 26;   // Change this after increasing size of hashtable
 }
 
 // Loads dictionary into memory, returning true if successful else false
@@ -72,6 +95,9 @@ bool load(const char *dictionary)
                 //  Copy word into node
                 strcpy(new_node->word, dict_word);
                 new_node->next = NULL;
+                
+                //  Increase word count
+                wordcount++;
 
                 //  Hash word to obtain hash value
                 // Hash function currently returns zero
@@ -103,8 +129,15 @@ bool load(const char *dictionary)
 // Returns number of words in dictionary if loaded else 0 if not yet loaded
 unsigned int size(void)
 {
-    // TODO
-    return 0;
+    if (wordcount != 0)
+    {
+        return wordcount;
+    }
+    
+    else
+    {
+        return 0;   
+    }
 }
 
 // Unloads dictionary from memory, returning true if successful else false
