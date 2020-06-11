@@ -31,9 +31,13 @@ bool check(const char *word)
 // Hashes word to a number
 unsigned int hash(const char *word)
 {
-    // TODO
-    
-    return 0;
+    unsigned int hash = 5381;
+    int c = 0;
+        
+    while (c == *word++)
+        hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
+
+    return hash % 26;
 }
 
 // Loads dictionary into memory, returning true if successful else false
@@ -64,7 +68,7 @@ bool load(const char *dictionary)
                 {
                     return false;
                 }
-                    
+
                 //  Copy word into node
                 strcpy(new_node->word, dict_word);
                 new_node->next = NULL;
@@ -80,15 +84,15 @@ bool load(const char *dictionary)
                         table[hashvalue] = new_node;
                         new_node->next = NULL;
                 }
-                
+
                 else
                 {
                     // Set new node as head of list:
                     //  Point to first element in table
                     new_node->next = table[hashvalue];
-                    
+
                     //  Point table[hashvalue] to new node
-                    table[hashvalue]->next = new_node;    
+                    table[hashvalue]->next = new_node;
                 }
             }
     }
