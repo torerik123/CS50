@@ -60,7 +60,7 @@ unsigned int hash(const char *word)
     char *lowercase = malloc(sizeof(x * sizeof(int)));
     for (int i = 0; i < x; i++)
     {
-        lowercase[i] = word[i];
+        lowercase[i] = tolower(word[i]);
     }
     
     //  Hash word
