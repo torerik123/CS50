@@ -16,7 +16,7 @@ typedef struct node
 node;
 
 // Number of buckets in hash table // change this value after loading dict works
-const unsigned int N = 26;
+const unsigned int N = 676;
 
 // Hash table
 node *table[N];
@@ -60,7 +60,7 @@ unsigned int hash(const char *word)
     while ((c = *word++))
         hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
 
-    return hash % 26;   // Change this after increasing size of hashtable
+    return hash % N;
 }
 
 // Loads dictionary into memory, returning true if successful else false
