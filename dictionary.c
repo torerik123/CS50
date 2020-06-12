@@ -6,6 +6,7 @@
 #include <strings.h>
 #include <string.h>
 #include "dictionary.h"
+#include <ctype.h>
 
 // Represents a node in a hash table
 typedef struct node
@@ -54,6 +55,17 @@ bool check(const char *word)
 
 unsigned int hash(const char *word)
 {
+    //  Make word lowercase before hashing
+    char *lowercase = NULL;
+    
+    for (int i = 0; i != '\0'; i++)
+    
+    {
+       lowercase[i] = tolower(word[i]);
+    }
+
+    word = lowercase;
+    
     unsigned int hash = 5381;
     int c = 0;
 
@@ -85,7 +97,7 @@ bool load(const char *dictionary)
         //  Read strings from file, one at a time. fscanf will return EOF once it reaches end of file
         while(fscanf(file, "%s", dict_word) != EOF)
             {
-                //  Allocate space for word node
+                //  Allocate space for node to store word found by fscanf
                 node *new_node = malloc(sizeof(node));
                 if (new_node == NULL)
                 {
@@ -100,26 +112,25 @@ bool load(const char *dictionary)
                 wordcount++;
 
                 //  Hash word to obtain hash value
-                // Hash function currently returns zero
                 unsigned int hashvalue = hash(dict_word);
-                
-                //Initialize hash table
+
+                //  Initialize hash table
                 for (int i = 0; i < N; i++)
                 {
                     table[i] = NULL;
                 }
-                
-                //  Insert node into hash table
-                //  If table[hashvalue] is empty
+
+                //  If hash table is empty and does not point to any nodes
                 if (table[hashvalue] == NULL)
                 {
+                        //  Insert node into hash table
                         table[hashvalue] = new_node;
                         new_node->next = NULL;
                 }
 
                 else
                 {
-                    // Set new node as head of list:
+                    //  Set new node as head of list:
                     //  Point to first element in table
                     new_node->next = table[hashvalue];
 
