@@ -96,17 +96,21 @@ bool load(const char *dictionary)
         //  Read strings from file, one at a time. fscanf will return EOF once it reaches end of file
         while(fscanf(file, "%s", dict_word) != EOF)
             {
+                
+                //  List of size 0
+                node *head = NULL;
+                
                 //  Allocate space for node to store word found by fscanf
                 node *new_node = malloc(sizeof(node));
                 if (new_node == NULL)
                 {
-                    unload();
                     return false;
                 }
-
+                
                 //  Copy word into node
                 strcpy(new_node->word, dict_word);
                 new_node->next = NULL;
+                head = new_node;
 
                 //  Increase word count
                 wordcount++;
