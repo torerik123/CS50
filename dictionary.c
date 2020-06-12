@@ -24,7 +24,7 @@ node *table[N];
 // Wordcount
 int wordcount = 0;
 
-// Returns true if word is in dictionary else false
+// Returns true if word is in dictionary else false -//SOMETHING IN HERE IS WRONG
 bool check(const char *word)
 {
     //  Hash word
@@ -40,11 +40,11 @@ bool check(const char *word)
     //Keep moving until cursor == NULL
     while (cursor != NULL)
     {
-        if (strcasecmp(cursor->word, word) != 0)
+        if (strcasecmp(cursor->word, word) == 0)
         {
+            cursor = cursor->next;
             return true;
         }
-        cursor = cursor->next;
     }
     return false;
 }
@@ -102,7 +102,13 @@ bool load(const char *dictionary)
                 //  Hash word to obtain hash value
                 // Hash function currently returns zero
                 unsigned int hashvalue = hash(dict_word);
-
+                
+                //Initialize hash table
+                for (int i = 0; i < N; i++)
+                {
+                    table[i] = NULL;
+                }
+                
                 //  Insert node into hash table
                 //  If table[hashvalue] is empty
                 if (table[hashvalue] == NULL)
@@ -147,15 +153,15 @@ bool unload(void)
     {
         //  Cursor points to first element in list
         node *cursor = table[i];
-        
+
         while (cursor != NULL)
         {
             node *tmp = cursor;
             cursor = cursor->next;
             free(tmp);
-        }    
+        }
     return true;
     }
-    
+
     return false;
 }
