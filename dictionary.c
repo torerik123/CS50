@@ -56,18 +56,13 @@ bool check(const char *word)
 unsigned int hash(const char *word)
 {
     //  Make word lowercase before hashing
-    char *lowercase = NULL;
+  
     
-    for (int i = 0; i != '\0'; i++)
-    {
-       lowercase[i] = tolower(word[i]);
-    }
-
     //  Hash word
     unsigned int hash = 5381;
     int c = 0;
 
-    while ((c = *lowercase++))
+    while ((c = *word++))
         hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
 
     return hash % N;
