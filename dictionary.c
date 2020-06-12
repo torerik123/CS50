@@ -57,12 +57,13 @@ unsigned int hash(const char *word)
 {
     //  Make word lowercase before hashing
     int x = strlen(word);
+
     char *lowercase = malloc(sizeof(x * sizeof(int)));
     for (int i = 0; i < x; i++)
     {
         lowercase[i] = tolower(word[i]);
     }
-    
+
     //  Hash word
     unsigned int hash = 5381;
     int c = 0;
@@ -99,6 +100,7 @@ bool load(const char *dictionary)
                 node *new_node = malloc(sizeof(node));
                 if (new_node == NULL)
                 {
+                    unload();
                     return false;
                 }
 
