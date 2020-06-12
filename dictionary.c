@@ -56,7 +56,7 @@ bool check(const char *word)
 unsigned int hash(const char *word)
 {
     //  Length of word
-    int x = strlen(word + 1); 
+    int x = strlen(word); 
     
     //  Allocate memory for lowercase array the size of x ints
     char *lowercase = malloc(sizeof(x * sizeof(int)));
