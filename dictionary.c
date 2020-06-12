@@ -32,11 +32,11 @@ bool check(const char *word)
 
     //  Access linked list at table[hashvalue]
     node *linkedlist = table[hashvalue];
-    
+
     //Traverse linked list
     //Set cursor to first item in table[hashvalue]
     node *cursor = &linkedlist[0];
-    
+
     //Keep moving until cursor == NULL
     while (cursor != NULL)
     {
@@ -95,7 +95,7 @@ bool load(const char *dictionary)
                 //  Copy word into node
                 strcpy(new_node->word, dict_word);
                 new_node->next = NULL;
-                
+
                 //  Increase word count
                 wordcount++;
 
@@ -133,16 +133,29 @@ unsigned int size(void)
     {
         return wordcount;
     }
-    
+
     else
     {
-        return 0;   
+        return 0;
     }
 }
 
 // Unloads dictionary from memory, returning true if successful else false
 bool unload(void)
 {
-    // TODO
+    for (int i = 0; i < N; i++)
+    {
+        //  Cursor points to first element in list
+        node *cursor = table[i];
+        
+        while (cursor != NULL)
+        {
+            node *tmp = cursor;
+            cursor = cursor->next;
+            free(tmp);
+        }    
+    return true;
+    }
+    
     return false;
 }
