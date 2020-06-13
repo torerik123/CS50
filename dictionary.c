@@ -58,7 +58,7 @@ unsigned int hash(const char *word)
     //  Make word lowercase before hashing
     int x = strlen(word) + 1;
     char *lowercase = malloc(x * sizeof(int));
-    
+
     for (int i = 0; i < x; i++)
     {
         lowercase[i] = tolower(word[i]);
@@ -90,20 +90,20 @@ bool load(const char *dictionary)
     {
         //  Load words into hash table to store dictionary:
 
-        //  Temp array for reading words
+        //  Temp array for reading words - old char dict_word[LENGTH + 1];
         char dict_word[LENGTH + 1];
 
         //  Read strings from file, one at a time. fscanf will return EOF once it reaches end of file
         while(fscanf(file, "%s", dict_word) != EOF)
             {
-                
                 //  Allocate space for node to store word found by fscanf
                 node *new_node = malloc(sizeof(node));
                 if (new_node == NULL)
                 {
+                    unload();
                     return false;
                 }
-                
+
                 //  Copy word into node
                 strcpy(new_node->word, dict_word);
                 new_node->next = NULL;
