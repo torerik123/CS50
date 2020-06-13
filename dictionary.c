@@ -65,6 +65,10 @@ unsigned int hash(const char *word)
     for (int i = 0; i < x; i++)
     {
         lowercase[i] = tolower(word[i]);
+        if (i == x)
+        {
+            lowercase[i] = '\0';
+        }
     }
 
     //  Hash word
