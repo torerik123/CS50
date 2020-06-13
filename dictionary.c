@@ -56,9 +56,9 @@ bool check(const char *word)
 unsigned int hash(const char *word)
 {
     //  Make word lowercase before hashing
-    int x = strlen(word) + 1;
+    int x = strlen(word);
     
-    char *lowercase = NULL;//malloc(x * sizeof(int));
+    char *lowercase = malloc(x * sizeof(int));
 
     for (int i = 0; i < x; i++)
     {
