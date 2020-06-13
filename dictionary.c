@@ -28,15 +28,6 @@ int wordcount = 0;
 // Returns true if word is in dictionary else false -//SOMETHING IN HERE IS WRONG
 bool check(const char *word)
 {
-    //  Make word lowercase
-    int x = strlen(word) + 1;
-    char *lowercase = malloc(x * sizeof(char));
-
-    for (int i = 0; i < x; i++)
-    {
-        lowercase[i] = tolower(word[i]);
-    }
-    
     //  Hash word
     int hashvalue = hash(word);
 
