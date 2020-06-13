@@ -57,6 +57,7 @@ unsigned int hash(const char *word)
 {
     //  Make word lowercase before hashing
     int x = strlen(word) + 1;
+    
     char *lowercase = malloc(x * sizeof(int));
 
     for (int i = 0; i < x; i++)
@@ -64,11 +65,12 @@ unsigned int hash(const char *word)
         lowercase[i] = tolower(word[i]);
     }
 
+    char *newlocase = lowercase;
     //  Hash word
     unsigned int hash = 5381;
     int c = 0;
 
-    while ((c = *lowercase++))
+    while ((c = *newlocase++))
         hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
 
     return hash % N;
