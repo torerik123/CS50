@@ -39,7 +39,7 @@ bool check(const char *word)
     }
     
     //  Hash word
-    int hashvalue = hash(word);
+    int hashvalue = hash(lowercase);
 
     //  Access linked list at table[hashvalue]
     node *linkedlist = table[hashvalue];
