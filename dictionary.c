@@ -62,13 +62,8 @@ unsigned int hash(const char *word)
     for (int i = 0; i < x; i++)
     {
         lowercase[i] = tolower(word[i]);
-        // Adds null terminator to end string
-    
     }
-    
-    //  Add NULL character to the end
-    lowercase[x] = '\0';
-    
+
     //  Hash word
     unsigned int hash = 5381;
     int c = 0;
@@ -99,7 +94,7 @@ bool load(const char *dictionary)
         char dict_word[LENGTH + 1];
 
         //  Read strings from file, one at a time. fscanf will return EOF once it reaches end of file
-        while(fscanf(file, "%s", dict_word) != EOF)
+        while(fscanf(file, "%s", dict_word) != 1)
             {
                 //  Allocate space for node to store word found by fscanf
                 node *new_node = malloc(sizeof(node));
