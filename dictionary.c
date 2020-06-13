@@ -62,8 +62,13 @@ unsigned int hash(const char *word)
     for (int i = 0; i < x; i++)
     {
         lowercase[i] = tolower(word[i]);
+        // Adds null terminator to end string
+    
     }
-
+    
+    //  Add NULL character to the end
+    lowercase[x] = '\0';
+    
     //  Hash word
     unsigned int hash = 5381;
     int c = 0;
