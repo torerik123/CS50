@@ -105,15 +105,25 @@ bool load(const char *dictionary)
                     return false;
                 }
 
+                //  Make word lowercase before hashing
+                int x = strlen(dict_word) + 1;
+    
+                 char *lowercase = malloc(x * sizeof(char));
+
+                for (int i = 0; i < x; i++)
+                {
+                    lowercase[i] = tolower(dict_word[i]);
+                 }
+
                 //  Copy word into node
-                strcpy(new_node->word, dict_word);
+                strcpy(new_node->word, lowercase);
                 new_node->next = NULL;
 
                 //  Increase word count
                 wordcount++;
 
                 //  Hash word to obtain hash value
-                unsigned int hashvalue = hash(dict_word);
+                unsigned int hashvalue = hash(lowercase);
 
                 //  Initialize hash table
                 for (int i = 0; i < N; i++)
