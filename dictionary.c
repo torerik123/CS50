@@ -65,12 +65,11 @@ unsigned int hash(const char *word)
         lowercase[i] = tolower(word[i]);
     }
 
-    char *newlocase = lowercase;
     //  Hash word
     unsigned int hash = 5381;
     int c = 0;
 
-    while ((c = *newlocase++))
+    while ((c = *lowercase++))
         hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
 
     return hash % N;
