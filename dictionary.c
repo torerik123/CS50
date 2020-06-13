@@ -80,7 +80,7 @@ unsigned int hash(const char *word)
     unsigned int hash = 5381;
     int c = 0;
 
-    while ((c = (int)lowercase++))
+    while ((c = *lowercase++))
         hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
 
     return hash % N;
