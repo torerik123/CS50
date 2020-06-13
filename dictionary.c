@@ -71,7 +71,6 @@ unsigned int hash(const char *word)
     while ((c = *lowercase++))
         hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
     
-    free(lowercase);
     return hash % N;
 }
 
