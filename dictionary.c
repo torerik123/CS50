@@ -25,7 +25,7 @@ node *table[N];
 // Wordcount
 int wordcount = 0;
 
-// Returns true if word is in dictionary else false -//SOMETHING IN HERE IS WRONG
+// Returns true if word is in dictionary else false
 bool check(const char *word)
 {
     //  Hash word
@@ -120,25 +120,23 @@ bool load(const char *dictionary)
                 //  Initialize hash table
                 for (int i = 0; i < N; i++)
                 {
-                    table[i] = NULL;
-                }
-
-                //  If hash table is empty and does not point to any nodes
-                if (table[hashvalue] == NULL)
-                {
+                    //  If hash table is empty and does not point to any nodes
+                    if (table[hashvalue] == NULL)
+                    {
                         //  Insert node into hash table
                         table[hashvalue] = new_node;
                         new_node->next = NULL;
-                }
+                    }
 
-                else
-                {
-                    //  Set new node as head of list:
-                    //  Point to first element in table
-                    new_node->next = table[hashvalue];
+                    else
+                    {
+                        //  Set new node as head of list:
+                        //  Point to first element in table
+                        new_node->next = table[hashvalue];
 
-                    //  Point table[hashvalue] to new node
-                    table[hashvalue]->next = new_node;
+                        //  Point table[hashvalue] to new node
+                        table[hashvalue]->next = new_node;
+                    }
                 }
             }
     }
