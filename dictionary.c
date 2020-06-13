@@ -28,24 +28,8 @@ int wordcount = 0;
 // Returns true if word is in dictionary else false -//SOMETHING IN HERE IS WRONG
 bool check(const char *word)
 {
-    //  Length of word + 1 to store \0 character
-    int x = strlen(word) + 1;
-    
-    //  Allocate memory
-    char *lowercase = malloc(x * sizeof(char));
-
-    //  Make word lowercase before hashing
-    for (int i = 0; i < x; i++)
-    {
-        lowercase[i] = tolower(word[i]);
-        if (i == x)
-        {
-            lowercase[i] = '\0';
-        }
-    }
-    
     //  Hash word
-    int hashvalue = hash(lowercase);
+    int hashvalue = hash(word);
 
     //  Access linked list at table[hashvalue]
     node *linkedlist = table[hashvalue];
