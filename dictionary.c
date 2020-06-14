@@ -135,7 +135,8 @@ bool load(const char *dictionary)
                 wordcount++;
 
                 //  Hash word to obtain hash value
-                unsigned int hashvalue = hash(dict_word);
+                unsigned int hashvalue;
+                hashvalue = hash(dict_word);
 
                 //  If hash table is empty and does not point to any nodes
                 if (table[hashvalue] == NULL)
