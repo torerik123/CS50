@@ -39,7 +39,6 @@ bool check(const char *word)
 
     //Traverse linked list
     cursor = NULL;
-    head = NULL;
     cursor = head;
 
     //Keep moving until cursor == NULL
