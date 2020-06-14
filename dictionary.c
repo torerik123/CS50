@@ -111,7 +111,7 @@ bool load(const char *dictionary)
     {
         //  Load words into hash table to store dictionary:
         //  Temp array for reading words
-        char dict_word[LENGTH + 1];
+        char dict_word[LENGTH];
 
         //Create head node
         head = malloc(sizeof(node));
@@ -128,15 +128,11 @@ bool load(const char *dictionary)
                     return false;
                 }
 
-                //  Copy word into node
-
-
                 //  Increase word count
                 wordcount++;
 
                 //  Hash word to obtain hash value
-                unsigned int hashvalue;
-                hashvalue = hash(dict_word);
+                unsigned int hashvalue = hash(dict_word);
 
                 //  If hash table is empty and does not point to any nodes
                 if (table[hashvalue] == NULL)
