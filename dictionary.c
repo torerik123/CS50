@@ -80,6 +80,13 @@ unsigned int hash(const char *word)
 // Loads dictionary into memory, returning true if successful else false
 bool load(const char *dictionary)
 {
+    //  Initialize hash table
+        for (int i = 0; i < N; i++)
+        {
+            table[i] = NULL;
+        }
+
+    
     //  Open dictionary file
         FILE *file = fopen(dictionary, "r");
 
@@ -92,10 +99,9 @@ bool load(const char *dictionary)
     else
     {
         //  Load words into hash table to store dictionary:
-
         //  Temp array for reading words
         char dict_word[LENGTH + 1];
-
+    
         //  Read strings from file, one at a time
         while(fscanf(file, "%s", dict_word) != EOF)
             {
@@ -117,26 +123,22 @@ bool load(const char *dictionary)
                 //  Hash word to obtain hash value
                 unsigned int hashvalue = hash(dict_word);
 
-                //  Initialize hash table
-                for (int i = 0; i < N; i++)
+                //  If hash table is empty and does not point to any nodes
+                if (table[hashvalue] == NULL)
                 {
-                    //  If hash table is empty and does not point to any nodes
-                    if (table[hashvalue] == NULL)
-                    {
                         //  Insert node into hash table
                         table[hashvalue] = new_node;
                         new_node->next = NULL;
-                    }
+                }
 
-                    else
-                    {
-                        //  Set new node as head of list:
-                        //  Point to first element in table
-                        new_node->next = table[hashvalue];
+                else
+                {
+                    //  Set new node as head of list:
+                    //  Point to first element in table
+                    new_node->next = table[hashvalue];
 
-                        //  Point table[hashvalue] to new node
-                        table[hashvalue]->next = new_node;
-                    }
+                    //  Point table[hashvalue] to new node
+                    table[hashvalue]->next = new_node;
                 }
             }
     }
