@@ -22,6 +22,8 @@ const unsigned int N = 676;
 // Hash table
 node *table[N];
 
+node *head;
+
 // Wordcount
 int wordcount = 0;
 
@@ -31,12 +33,10 @@ bool check(const char *word)
     //  Hash word
     int hashvalue = hash(word);
 
-    //  Access linked list at table[hashvalue]
-    node *linkedlist = table[hashvalue];
-
     //Traverse linked list
     //Set cursor to first item in table[hashvalue]
-    node *cursor = &linkedlist[0];
+    node *cursor = malloc(sizeof(node));
+    cursor = head;
 
     //Keep moving until cursor == NULL // WTF IS WRONG HERE
     while (cursor != NULL)
@@ -106,7 +106,7 @@ bool load(const char *dictionary)
         char dict_word[LENGTH + 1];
         
         //Create head node
-        node *head = malloc(sizeof(node));
+        head = malloc(sizeof(node));
         head->next = NULL;
 
         //  Read strings from file, one at a time
