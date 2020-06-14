@@ -111,7 +111,7 @@ bool load(const char *dictionary)
     {
         //  Load words into hash table to store dictionary:
         //  Temp array for reading words
-        char dict_word[LENGTH];
+        char dict_word[LENGTH +1];
 
         //Create head node
         head = malloc(sizeof(node));
@@ -122,6 +122,7 @@ bool load(const char *dictionary)
             {
                 //  Allocate space for node to store word found by fscanf
                 node *new_node = malloc(sizeof(node));
+                new_node->next = NULL;
                 if (new_node == NULL)
                 {
                     unload();
