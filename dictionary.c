@@ -38,7 +38,7 @@ bool check(const char *word)
     int hashvalue = hash(word);
 
     //Traverse linked list
-    cursor = malloc(sizeof(node));
+    cursor = NULL;
     cursor = head;
 
     //Keep moving until cursor == NULL
