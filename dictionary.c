@@ -107,7 +107,7 @@ bool load(const char *dictionary)
         //  Load words into hash table to store dictionary:
         //  Temp array for reading words
         char dict_word[LENGTH + 1];
-        
+
         //Create head node
         head = malloc(sizeof(node));
         head->next = NULL;
@@ -124,7 +124,7 @@ bool load(const char *dictionary)
                 }
 
                 //  Copy word into node
-                
+
 
                 //  Increase word count
                 wordcount++;
@@ -139,7 +139,7 @@ bool load(const char *dictionary)
                     strcpy(new_node->word, dict_word);
                     head = new_node;
                 }
-                
+
                 else
                 {
                     //  Set new node as head of list:
@@ -186,6 +186,5 @@ bool unload(void)
         }
     return true;
     }
-
     return false;
 }
