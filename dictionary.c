@@ -150,8 +150,9 @@ bool load(const char *dictionary)
                     //  Point to first element in table
                     new_node->next = head;
 
-                    //  Point table[hashvalue] to new node
+                    //  Point head to new node
                     head = new_node;
+                    free(head);
                 }
             }
     }
