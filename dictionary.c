@@ -22,7 +22,11 @@ const unsigned int N = 676;
 // Hash table
 node *table[N];
 
+//  Head node
 node *head;
+
+//  Cursor
+node * cursor;
 
 // Wordcount
 int wordcount = 0;
@@ -34,11 +38,10 @@ bool check(const char *word)
     int hashvalue = hash(word);
 
     //Traverse linked list
-    //Set cursor to first item in table[hashvalue]
-    node *cursor = malloc(sizeof(node));
+    cursor = malloc(sizeof(node));
     cursor = head;
 
-    //Keep moving until cursor == NULL // WTF IS WRONG HERE
+    //Keep moving until cursor == NULL
     while (cursor != NULL)
     {
         if (strcasecmp(cursor->word, word) == 0)
@@ -173,7 +176,7 @@ bool unload(void)
     for (int i = 0; i < N; i++)
     {
         //  Cursor points to first element in list
-        node *cursor = table[i];
+        cursor = head;
 
         while (cursor != NULL)
         {
