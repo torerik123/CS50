@@ -43,8 +43,13 @@ bool check(const char *word)
     {
         if (strcasecmp(cursor->word, word) == 0)
         {
-            cursor = cursor->next;
+            
             return true;
+        }
+        
+        else
+        {
+            cursor = cursor->next;
         }
     }
     return false;
