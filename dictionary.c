@@ -40,18 +40,13 @@ bool check(const char *word)
     //Traverse linked list
     cursor = NULL;
     cursor = head;
-    
-    if (cursor == NULL)
-    {
-        return false;
-    }
-    
-    else
+
     //Keep moving until cursor == NULL
     while (cursor != NULL)
     {
         if (strcasecmp(cursor->word, word) == 0)
         {
+            cursor = cursor->next;
             return true;
         }
 
