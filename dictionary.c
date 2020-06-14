@@ -112,6 +112,12 @@ bool load(const char *dictionary)
         //  Load words into hash table to store dictionary:
         //  Temp array for reading words
         char dict_word[LENGTH + 1];
+        char *p;
+        p = NULL;
+        for (int i = 0; i < LENGTH + 1; i++)
+        {
+            dict_word[i] = *p;
+        }
 
         //Create head node
         head = malloc(sizeof(node));
