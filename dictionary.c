@@ -40,7 +40,13 @@ bool check(const char *word)
     //Traverse linked list
     cursor = NULL;
     cursor = head;
-
+    
+    if (cursor == NULL)
+    {
+        return false;
+    }
+    
+    else
     //Keep moving until cursor == NULL
     while (cursor != NULL)
     {
@@ -122,7 +128,6 @@ bool load(const char *dictionary)
             {
                 //  Allocate space for node to store word found by fscanf
                 node *new_node = malloc(sizeof(node));
-                new_node->next = NULL;
                 if (new_node == NULL)
                 {
                     unload();
