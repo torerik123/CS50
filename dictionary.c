@@ -38,15 +38,14 @@ bool check(const char *word)
     //Set cursor to first item in table[hashvalue]
     node *cursor = &linkedlist[0];
 
-    //Keep moving until cursor == NULL
+    //Keep moving until cursor == NULL // WTF IS WRONG HERE
     while (cursor != NULL)
     {
         if (strcasecmp(cursor->word, word) == 0)
         {
-            
             return true;
         }
-        
+
         else
         {
             cursor = cursor->next;
@@ -90,7 +89,7 @@ bool load(const char *dictionary)
             table[i] = NULL;
         }
 
-    
+
     //  Open dictionary file
         FILE *file = fopen(dictionary, "r");
 
@@ -105,7 +104,11 @@ bool load(const char *dictionary)
         //  Load words into hash table to store dictionary:
         //  Temp array for reading words
         char dict_word[LENGTH + 1];
-    
+        
+        //Create head node
+        node *head = malloc(sizeof(node));
+        head->next = NULL;
+
         //  Read strings from file, one at a time
         while(fscanf(file, "%s", dict_word) != EOF)
             {
@@ -118,8 +121,7 @@ bool load(const char *dictionary)
                 }
 
                 //  Copy word into node
-                strcpy(new_node->word, dict_word);
-                new_node->next = NULL;
+                
 
                 //  Increase word count
                 wordcount++;
@@ -130,19 +132,19 @@ bool load(const char *dictionary)
                 //  If hash table is empty and does not point to any nodes
                 if (table[hashvalue] == NULL)
                 {
-                        //  Insert node into hash table
-                        table[hashvalue] = new_node;
-                        new_node->next = NULL;
+                     new_node->next = head;
+                    strcpy(new_node->word, dict_word);
+                    head = new_node;
                 }
-
+                
                 else
                 {
                     //  Set new node as head of list:
                     //  Point to first element in table
-                    new_node->next = table[hashvalue];
+                    new_node->next = head;
 
                     //  Point table[hashvalue] to new node
-                    table[hashvalue]->next = new_node;
+                    head = new_node;
                 }
             }
     }
