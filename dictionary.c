@@ -39,6 +39,7 @@ bool check(const char *word)
 
     //Traverse linked list
     cursor = NULL;
+    head = NULL;
     cursor = head;
 
     //Keep moving until cursor == NULL
@@ -65,21 +66,19 @@ unsigned int hash(const char *word)
     //  Length of word + 1 to store \0 character
     int x = strlen(word) + 1;
 
-    //  Allocate memory
-    //char *lowercase = malloc(x * sizeof(char));
-    
-    //BUGFIX
+    //  Declare arry to store lowercase letters and pointer to the array
     char lowercase[x];
     char *p;
-    
+
     //  Make word lowercase before hashing
     for (int i = 0; i < x; i++)
     {
         lowercase[i] = tolower(word[i]);
     }
-     
+
+     // p points to lowercase
      p = lowercase;
-     
+
     //  Hash word
     unsigned int hash = 5381;
     int c = 0;
