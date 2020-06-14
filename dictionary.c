@@ -73,7 +73,6 @@ unsigned int hash(const char *word)
 
     while ((c = *lowercase++))
         hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
-
     return hash % N;
 }
 
