@@ -65,7 +65,7 @@ unsigned int hash(const char *word)
     //  Length of word + 1 to store \0 character
     int x = strlen(word) + 1;
 
-    //  Declare arry to store lowercase letters and pointer to the array
+    //  Declare array to store lowercase letters and pointer to the array
     char lowercase[x];
     char *p;
 
@@ -109,7 +109,7 @@ bool load(const char *dictionary)
         //Create head node
         head = calloc(1, sizeof(node));
         head->next = NULL;
-        
+
         //  Read strings from file, one at a time
         while(fscanf(file, "%s", dict_word) != EOF)
             {
@@ -145,7 +145,7 @@ bool load(const char *dictionary)
                     //  Point head to new node
                     head = new_node;
                 }
-                
+
             }
     }
         fclose(file);
