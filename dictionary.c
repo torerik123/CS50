@@ -38,8 +38,8 @@ bool check(const char *word)
     int hashvalue = hash(word);
 
     //Traverse linked list
-    cursor = table[hashvalue];
-    //cursor = head;
+    cursor = NULL;
+    cursor = head;
 
     //Keep moving until cursor == NULL
     while (cursor != NULL)
