@@ -35,7 +35,7 @@ bool check(const char *word)
     int hashvalue = hash(word);
 
     //Traverse linked list
-    cursor = malloc(sizeof(node));
+    cursor = NULL;
     cursor = table[hashvalue];
     
     //Keep moving until cursor == NULL
@@ -169,7 +169,7 @@ bool unload(void)
     for (int i = 0; i < N; i++)
     {
         //  Cursor points to first element in list
-        cursor = malloc(sizeof(node));
+        cursor = NULL;
         cursor = table[i];
 
         while (cursor != NULL)
@@ -178,6 +178,7 @@ bool unload(void)
             cursor = cursor->next;
             free(tmp);
         }
+ 
     return true;
     }
     return false;
