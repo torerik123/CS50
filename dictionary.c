@@ -169,7 +169,8 @@ bool unload(void)
     for (int i = 0; i < N; i++)
     {
         //  Cursor points to first element in list
-        //cursor = table[hashvalue];
+        cursor = malloc(sizeof(node));
+        cursor = table[i];
 
         while (cursor != NULL)
         {
