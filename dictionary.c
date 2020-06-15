@@ -130,8 +130,8 @@ bool load(const char *dictionary)
                 //  If hash table is empty and does not point to any nodes
                 if (table[hashvalue] == NULL)
                 {
-                     table[hashvalue] = head; // BUGFIX
-                     new_node->next = head;
+                    table[hashvalue] = head;
+                    new_node->next = head;
                     strcpy(new_node->word, dict_word);
                     head = new_node;
                 }
@@ -143,7 +143,7 @@ bool load(const char *dictionary)
                     new_node->next = head;
 
                     //  Point head to new node
-                    head = new_node;
+                    head->next = new_node;
                 }
             }
     }
