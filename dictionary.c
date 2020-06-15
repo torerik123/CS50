@@ -46,7 +46,6 @@ bool check(const char *word)
     {
         if (strcasecmp(cursor->word, word) == 0)
         {
-            cursor = cursor->next;
             return true;
         }
 
@@ -91,13 +90,6 @@ unsigned int hash(const char *word)
 // Loads dictionary into memory, returning true if successful else false
 bool load(const char *dictionary)
 {
-    //DEBUG
-    //  Initialize hash table
-        //for (int i = 0; i < N; i++)
-        //{
-        //    table[i] = NULL;
-        //}
-
 
     //  Open dictionary file
         FILE *file = fopen(dictionary, "r");
@@ -112,7 +104,8 @@ bool load(const char *dictionary)
     {
         //  Load words into hash table to store dictionary:
         //  Temp array for reading words
-        char dict_word[LENGTH +1];
+        char *dict_word= calloc(1, sizeof(char));
+        
 
         //Create head node
         head = malloc(sizeof(node));
