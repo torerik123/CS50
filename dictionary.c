@@ -23,7 +23,7 @@ const unsigned long N = 150000;
 node *table[N];
 
 // Cursor
-node * cursor;
+node *cursor;
 
 // Node for linked list
 node *new_node;
@@ -70,13 +70,13 @@ unsigned int hash(const char *word)
     char *p;
 
     // Make word lowercase before hashing
-    for (int i = 0;i < x; i++)
+    for (int i = 0; i < x; i++)
     {
         lowercase[i] = tolower(word[i]);
     }
 
-     // p points to lowercase
-     p = lowercase;
+    // p points to lowercase
+    p = lowercase;
 
     // Hash word
     unsigned int hash = 5381;
@@ -94,7 +94,7 @@ unsigned int hash(const char *word)
 bool load(const char *dictionary)
 {
     // Open dictionary file
-        FILE *file = fopen(dictionary, "r");
+    FILE *file = fopen(dictionary, "r");
 
     // Check if return value is NULL and return false if it is
     if (file == NULL)
@@ -109,7 +109,7 @@ bool load(const char *dictionary)
         char dict_word[LENGTH + 1];
 
         // Read strings from file, one at a time
-        while(fscanf(file, "%s", dict_word) != EOF)
+        while (fscanf(file, "%s", dict_word) != EOF)
         {
             // Allocate space for node to store word found by fscanf
             new_node = malloc(sizeof(node));
@@ -148,8 +148,8 @@ bool load(const char *dictionary)
         }
     }
         
-        fclose(file);
-        return true;
+    fclose(file);
+    return true;
 }
 
 // Returns number of words in dictionary if loaded else 0 if not yet loaded
