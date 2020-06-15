@@ -37,7 +37,7 @@ bool check(const char *word)
     //Traverse linked list
     cursor = NULL;
     cursor = table[hashvalue];
-    
+
     //Keep moving until cursor == NULL
     while (cursor != NULL)
     {
@@ -107,28 +107,28 @@ bool load(const char *dictionary)
         while(fscanf(file, "%s", dict_word) != EOF)
             {
                 //  Allocate space for node to store word found by fscanf
-                node *new_node = malloc(sizeof(node));
+                node *new_node = calloc(1, sizeof(node));
                 if (new_node == NULL)
                 {
                     unload();
                     return false;
                 }
-                
+
                 //  Increase word count
                 wordcount++;
 
                 //  Hash word to obtain hash value
                 unsigned int hashvalue = hash(dict_word);
-                
+
                 //  Copy word into new_node
                 strcpy(new_node->word, dict_word);
-                
+
                 //  If hash table is empty and does not point to any nodes
                 if (table[hashvalue] == NULL)
                 {
                     table[hashvalue] = new_node;
                     new_node->next = NULL;
-                
+
                 }
 
                 else
@@ -136,7 +136,7 @@ bool load(const char *dictionary)
                     //  Set new node as head of list:
                     //  Point to first element in table
                     new_node->next = table[hashvalue];
-                    
+
                     //  Point head to new node
                     table[hashvalue] = new_node;
 
@@ -178,7 +178,7 @@ bool unload(void)
             cursor = cursor->next;
             free(tmp);
         }
- 
+
     return true;
     }
     return false;
