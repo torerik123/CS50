@@ -104,8 +104,9 @@ bool load(const char *dictionary)
     {
         //  Load words into hash table to store dictionary:
         //  Temp array for reading words
-        char dict_word[LENGTH +1];
-        
+        //char dict_word[LENGTH +1];
+        //BUGFIX
+        char *dict_word = calloc(LENGTH + 1, sizeof(char));
 
         //Create head node
         head = malloc(sizeof(node));
