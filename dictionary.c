@@ -113,6 +113,9 @@ bool load(const char *dictionary)
         //  Read strings from file, one at a time
         while(fscanf(file, "%s", dict_word) != EOF)
             {
+                //  Increase word count
+                wordcount++;
+                
                 //  Allocate space for node to store word found by fscanf
                 node *new_node = malloc(sizeof(node));
                 if (new_node == NULL)
@@ -120,9 +123,9 @@ bool load(const char *dictionary)
                     unload();
                     return false;
                 }
-
-                //  Increase word count
-                wordcount++;
+                
+                //Copy word
+                strcpy(new_node->word, dict_word);
 
                 //  Hash word to obtain hash value
                 unsigned int hashvalue = hash(dict_word);
@@ -130,21 +133,25 @@ bool load(const char *dictionary)
                 //  If hash table is empty and does not point to any nodes
                 if (table[hashvalue] == NULL)
                 {
-                    table[hashvalue] = head;
-                    new_node->next = head;
-                    strcpy(new_node->word, dict_word);
-                    head = new_node;
+                    table[hashvalue] = new_node;
+                    new_node->next = NULL;
+                    new_node = table[hashvalue];
+            
                 }
 
                 else
                 {
                     //  Set new node as head of list:
                     //  Point to first element in table
-                    table[hashvalue] = head;
-                    new_node->next = head;
-
+                    //table[hashvalue] = head;
+                    //new_node->next = head;
+                    new_node = table[hashvalue];
+                    new_node->next = table[hashvalue];
+                    table[hashvalue] = new_node;
+                    
+                    
                     //  Point head to new node
-                    head = new_node;
+                    //head = new_node;
                 }
 
             }
