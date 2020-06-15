@@ -16,8 +16,8 @@ typedef struct node
 }
 node;
 
-// Number of buckets in hash table // change this value after loading dict works
-const unsigned int N = 676;
+// Number of buckets in hash table
+const unsigned long N = 150000;
 
 // Hash table
 node *table[N];
