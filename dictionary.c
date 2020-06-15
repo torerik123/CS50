@@ -22,8 +22,11 @@ const unsigned long N = 150000;
 // Hash table
 node *table[N];
 
-//  Cursor
+// Cursor
 node * cursor;
+
+// Node for linked list
+node *new_node;
 
 // Wordcount
 int wordcount = 0;
@@ -107,7 +110,8 @@ bool load(const char *dictionary)
         while(fscanf(file, "%s", dict_word) != EOF)
             {
                 //  Allocate space for node to store word found by fscanf
-                node *new_node = malloc(sizeof(node));
+                new_node = malloc(sizeof(node));
+                new_node->next = NULL;
                 if (new_node == NULL)
                 {
                     unload();
@@ -134,19 +138,16 @@ bool load(const char *dictionary)
                 else
                 {
                     //  Set new node as head of list:
-                    //  Point to first element in table
+                    //  Point new_node->next to first element in table
                     new_node->next = table[hashvalue];
 
-                    //  Point head to new node
+                    //  Point head of linked list to new node
                     table[hashvalue] = new_node;
-                    
                 }
-
             }
     }
         fclose(file);
         return true;
-
 }
 
 // Returns number of words in dictionary if loaded else 0 if not yet loaded
@@ -172,14 +173,13 @@ bool unload(void)
         cursor = NULL;
         cursor = table[i];
 
+        //  Unload nodes until cursor = NULL, e.g. the list is empty
         while (cursor != NULL)
         {
             node *tmp = cursor;
             cursor = cursor->next;
             free(tmp);
         }
-
-    return true;
     }
-    return false;
+    return true;
 }
