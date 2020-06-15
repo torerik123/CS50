@@ -38,9 +38,9 @@ bool check(const char *word)
     int hashvalue = hash(word);
 
     //Traverse linked list
+    cursor = NULL;
     cursor = head;
-    cursor->next = NULL;
-    
+
     //Keep moving until cursor == NULL
     while (cursor != NULL)
     {
