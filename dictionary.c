@@ -22,10 +22,10 @@ const unsigned long N = 150000;
 // Hash table
 node *table[N];
 
-//  Cursor
+// Cursor
 node * cursor;
 
-//  Node for linked list
+// Node for linked list
 node *new_node;
 
 // Wordcount
@@ -138,19 +138,16 @@ bool load(const char *dictionary)
                 else
                 {
                     //  Set new node as head of list:
-                    //  Point to first element in table
+                    //  Point new_node->next to first element in table
                     new_node->next = table[hashvalue];
 
-                    //  Point head to new node
+                    //  Point head of linked list to new node
                     table[hashvalue] = new_node;
-
                 }
-
             }
     }
         fclose(file);
         return true;
-
 }
 
 // Returns number of words in dictionary if loaded else 0 if not yet loaded
@@ -176,6 +173,7 @@ bool unload(void)
         cursor = NULL;
         cursor = table[i];
 
+        //  Unload nodes until cursor = NULL, e.g. the list is empty
         while (cursor != NULL)
         {
             node *tmp = cursor;
