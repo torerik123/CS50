@@ -34,6 +34,7 @@ int wordcount = 0;
 // Returns true if word is in dictionary else false
 bool check(const char *word)
 {
+    const char *checkword = word;
     //  Hash word
     int hashvalue = hash(word);
 
@@ -44,7 +45,7 @@ bool check(const char *word)
     //Keep moving until cursor == NULL
     while (cursor != NULL)
     {
-        if (strcasecmp(word, word) == 0)
+        if (strcasecmp(cursor->word, checkword) == 0)
         {
             return true;
         }
