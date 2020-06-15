@@ -107,9 +107,9 @@ bool load(const char *dictionary)
         char dict_word[LENGTH + 1];
 
         //Create head node
-        head = malloc(sizeof(node));
+        //head = malloc(sizeof(node));
         //BUGFIX
-        //head = calloc(1, sizeof(node));
+        head = calloc(1, sizeof(node));
         
         head->next = NULL;
         
