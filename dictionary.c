@@ -86,6 +86,7 @@ unsigned int hash(const char *word)
     {
         hash = ((hash << 5) + hash) + c;
     }
+    
     return hash % N;
 }
 
@@ -146,6 +147,7 @@ bool load(const char *dictionary)
             }
         }
     }
+        
         fclose(file);
         return true;
 }
