@@ -34,14 +34,14 @@ int wordcount = 0;
 // Returns true if word is in dictionary else false
 bool check(const char *word)
 {
-    //  Hash word
+    // Hash word
     int hashvalue = hash(word);
 
-    //Traverse linked list
+    // Traverse linked list
     cursor = NULL;
     cursor = table[hashvalue];
 
-    //Keep moving until cursor == NULL
+    // Keep moving until cursor == NULL
     while (cursor != NULL)
     {
         if (strcasecmp(cursor->word, word) == 0)
@@ -54,23 +54,23 @@ bool check(const char *word)
             cursor = cursor->next;
         }
     }
+    
     return false;
 }
 
 // Hashes word to a number
 // djb2 hash function from http://www.cse.yorku.ca/~oz/hash.html
-
 unsigned int hash(const char *word)
 {
-    //  Length of word + 1 to store \0 character
+    // Length of word + 1 to store \0 character
     int x = strlen(word) + 1;
 
-    //  Declare array to store lowercase letters and pointer to the array
+    // Declare array to store lowercase letters and pointer to the array
     char lowercase[x];
     char *p;
 
-    //  Make word lowercase before hashing
-    for (int i = 0; i < x; i++)
+    // Make word lowercase before hashing
+    for (int i = 0;i < x; i++)
     {
         lowercase[i] = tolower(word[i]);
     }
@@ -78,23 +78,24 @@ unsigned int hash(const char *word)
      // p points to lowercase
      p = lowercase;
 
-    //  Hash word
+    // Hash word
     unsigned int hash = 5381;
     int c = 0;
 
     while ((c = *p++))
-        hash = ((hash << 5) + hash) + c; /* hash * 33 + c */
+    {
+        hash = ((hash << 5) + hash) + c;
+    }
     return hash % N;
 }
 
 // Loads dictionary into memory, returning true if successful else false
 bool load(const char *dictionary)
 {
-
-    //  Open dictionary file
+    // Open dictionary file
         FILE *file = fopen(dictionary, "r");
 
-    //  Check if return value is NULL and return false if it is
+    // Check if return value is NULL and return false if it is
     if (file == NULL)
     {
         return false;
@@ -102,49 +103,48 @@ bool load(const char *dictionary)
 
     else
     {
-        //  Load words into hash table to store dictionary:
-        //  Temp array for reading words
+        // Load words into hash table to store dictionary:
+        // Temp array for reading words
         char dict_word[LENGTH + 1];
 
-        //  Read strings from file, one at a time
+        // Read strings from file, one at a time
         while(fscanf(file, "%s", dict_word) != EOF)
+        {
+            // Allocate space for node to store word found by fscanf
+            new_node = malloc(sizeof(node));
+            new_node->next = NULL;
+            if (new_node == NULL)
             {
-                //  Allocate space for node to store word found by fscanf
-                new_node = malloc(sizeof(node));
-                new_node->next = NULL;
-                if (new_node == NULL)
-                {
-                    unload();
-                    return false;
-                }
-
-                //  Increase word count
-                wordcount++;
-
-                //  Hash word to obtain hash value
-                unsigned int hashvalue = hash(dict_word);
-
-                //  Copy word into new_node
-                strcpy(new_node->word, dict_word);
-
-                //  If hash table is empty and does not point to any nodes
-                if (table[hashvalue] == NULL)
-                {
-                    table[hashvalue] = new_node;
-                    new_node->next = NULL;
-
-                }
-
-                else
-                {
-                    //  Set new node as head of list:
-                    //  Point new_node->next to first element in table
-                    new_node->next = table[hashvalue];
-
-                    //  Point head of linked list to new node
-                    table[hashvalue] = new_node;
-                }
+                unload();
+                return false;
             }
+            
+            // Increase word count
+            wordcount++;
+
+            // Hash word to obtain hash value
+            unsigned int hashvalue = hash(dict_word);
+
+            // Copy word into new_node
+            strcpy(new_node->word, dict_word);
+
+            // If hash table is empty and does not point to any nodes
+            if (table[hashvalue] == NULL)
+            {
+                table[hashvalue] = new_node;
+                new_node->next = NULL;
+            }
+              
+            else
+            {
+                // Set new node as head of list:
+                // Point new_node->next to first element in table
+                new_node->next = table[hashvalue];
+
+                // Point head of linked list to new node
+                table[hashvalue] = new_node;
+            }
+        }
     }
         fclose(file);
         return true;
@@ -169,11 +169,11 @@ bool unload(void)
 {
     for (int i = 0; i < N; i++)
     {
-        //  Cursor points to first element in list
+        // Cursor points to first element in list
         cursor = NULL;
         cursor = table[i];
 
-        //  Unload nodes until cursor = NULL, e.g. the list is empty
+        // Unload nodes until cursor = NULL, e.g. the list is empty
         while (cursor != NULL)
         {
             node *tmp = cursor;
@@ -181,5 +181,6 @@ bool unload(void)
             free(tmp);
         }
     }
+    
     return true;
 }
