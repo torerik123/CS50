@@ -107,8 +107,13 @@ bool load(const char *dictionary)
         char dict_word[LENGTH + 1];
 
         //Create head node
-        head = malloc(sizeof(node));
+        //head = malloc(sizeof(node));
+        //BUGFIX
+        head = calloc(1, sizeof(node));
+        
         head->next = NULL;
+        
+        
         
         //  Read strings from file, one at a time
         while(fscanf(file, "%s", dict_word) != EOF)
@@ -143,7 +148,7 @@ bool load(const char *dictionary)
                     new_node->next = head;
 
                     //  Point head to new node
-                    head->next = new_node;
+                    head = new_node;
                 }
             }
     }
