@@ -140,6 +140,7 @@ bool load(const char *dictionary)
                 {
                     //  Set new node as head of list:
                     //  Point to first element in table
+                    table[hashvalue] = head;
                     new_node->next = head;
 
                     //  Point head to new node
