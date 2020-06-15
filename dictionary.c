@@ -104,16 +104,12 @@ bool load(const char *dictionary)
     {
         //  Load words into hash table to store dictionary:
         //  Temp array for reading words
-        char dict_word[LENGTH +1];
+        char dict_word[LENGTH +2];
 
         //Create head node
         head = malloc(sizeof(node));
         head->next = NULL;
         
-        //test
-         node *test = malloc(sizeof(node));
-         test->next = NULL;
-        free(test);
         //  Read strings from file, one at a time
         while(fscanf(file, "%s", dict_word) != EOF)
             {
