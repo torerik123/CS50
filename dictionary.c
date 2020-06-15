@@ -107,7 +107,7 @@ bool load(const char *dictionary)
         while(fscanf(file, "%s", dict_word) != EOF)
             {
                 //  Allocate space for node to store word found by fscanf
-                node *new_node = calloc(1, sizeof(node));
+                node *new_node = malloc(sizeof(node));
                 if (new_node == NULL)
                 {
                     unload();
@@ -139,7 +139,7 @@ bool load(const char *dictionary)
 
                     //  Point head to new node
                     table[hashvalue] = new_node;
-
+                    
                 }
 
             }
