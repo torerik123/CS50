@@ -34,18 +34,17 @@ int wordcount = 0;
 // Returns true if word is in dictionary else false
 bool check(const char *word)
 {
-    const char *checkword = word;
     //  Hash word
     int hashvalue = hash(word);
 
     //Traverse linked list
-    cursor = NULL;
     cursor = head;
-
+    cursor->next = NULL;
+    
     //Keep moving until cursor == NULL
     while (cursor != NULL)
     {
-        if (strcasecmp(cursor->word, checkword) == 0)
+        if (strcasecmp(cursor->word, word) == 0)
         {
             return true;
         }
