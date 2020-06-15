@@ -111,7 +111,8 @@ bool load(const char *dictionary)
         head->next = NULL;
         
         //test
-         node *TEST = malloc(sizeof(node));
+         node *test = malloc(sizeof(node));
+         test->next = NULL;
 
         //  Read strings from file, one at a time
         while(fscanf(file, "%s", dict_word) != EOF)
