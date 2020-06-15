@@ -25,6 +25,9 @@ node *table[N];
 //  Cursor
 node * cursor;
 
+//  Node for linked list
+node *new_node;
+
 // Wordcount
 int wordcount = 0;
 
@@ -107,7 +110,8 @@ bool load(const char *dictionary)
         while(fscanf(file, "%s", dict_word) != EOF)
             {
                 //  Allocate space for node to store word found by fscanf
-                node *new_node = calloc(1, sizeof(node)); //malloc(sizeof(node));
+                new_node = malloc(sizeof(node));
+                new_node->next = NULL;
                 if (new_node == NULL)
                 {
                     unload();
@@ -139,7 +143,7 @@ bool load(const char *dictionary)
 
                     //  Point head to new node
                     table[hashvalue] = new_node;
-                    
+
                 }
 
             }
@@ -178,8 +182,6 @@ bool unload(void)
             cursor = cursor->next;
             free(tmp);
         }
-
-    return true;
     }
-    return false;
+    return true;
 }
