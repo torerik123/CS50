@@ -44,7 +44,7 @@ bool check(const char *word)
     //Keep moving until cursor == NULL
     while (cursor != NULL)
     {
-        if (strcasecmp(cursor->word, word) == 0)
+        if (strcasecmp(word, word) == 0)
         {
             return true;
         }
