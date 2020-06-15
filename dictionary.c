@@ -22,9 +22,6 @@ const unsigned long N = 150000;
 // Hash table
 node *table[N];
 
-//  Head node
-node *head;
-
 //  Cursor
 node * cursor;
 
@@ -38,9 +35,9 @@ bool check(const char *word)
     int hashvalue = hash(word);
 
     //Traverse linked list
-    cursor = NULL;
+    cursor = malloc(sizeof(node));
     cursor = table[hashvalue];
-
+    
     //Keep moving until cursor == NULL
     while (cursor != NULL)
     {
@@ -106,10 +103,6 @@ bool load(const char *dictionary)
         //  Temp array for reading words
         char dict_word[LENGTH + 1];
 
-        //Create head node
-        head = calloc(1, sizeof(node));
-        head->next = NULL;
-
         //  Read strings from file, one at a time
         while(fscanf(file, "%s", dict_word) != EOF)
             {
@@ -120,31 +113,33 @@ bool load(const char *dictionary)
                     unload();
                     return false;
                 }
-
+                
                 //  Increase word count
                 wordcount++;
 
                 //  Hash word to obtain hash value
                 unsigned int hashvalue = hash(dict_word);
-
+                
+                //  Copy word into new_node
+                strcpy(new_node->word, dict_word);
+                
                 //  If hash table is empty and does not point to any nodes
                 if (table[hashvalue] == NULL)
                 {
-                    table[hashvalue] = head;
-                    new_node->next = head;
-                    strcpy(new_node->word, dict_word);
-                    head = new_node;
+                    table[hashvalue] = new_node;
+                    new_node->next = NULL;
+                
                 }
 
                 else
                 {
                     //  Set new node as head of list:
                     //  Point to first element in table
-                    new_node->next = head;
+                    new_node->next = table[hashvalue];
+                    
+                    //  Point head to new node
                     table[hashvalue] = new_node;
 
-                    //  Point head to new node
-                    head->next = NULL;
                 }
 
             }
@@ -174,7 +169,7 @@ bool unload(void)
     for (int i = 0; i < N; i++)
     {
         //  Cursor points to first element in list
-        cursor = head;
+        //cursor = table[hashvalue];
 
         while (cursor != NULL)
         {
