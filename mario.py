@@ -15,6 +15,7 @@ while True:
 # Checks if input is in correct range
 while n < 1 or n > 8:
     n = int(input("Height: "))
+    
 
 def printboxes(h):
     for i in range(h):              # Height = vertical columns.
@@ -24,5 +25,6 @@ def printboxes(h):
             else:
                 print("#", end="")  # Prints hashes
         print("\n", end="")         # Adds newline
+
 
 printboxes(n)
