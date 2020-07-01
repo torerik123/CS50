@@ -1,5 +1,5 @@
 /* Select name where people.id is IN*/
-SELECT COUNT(name) FROM people WHERE people.id
+SELECT name FROM people WHERE people.id
 IN
 
 /* List of person_id where person_id is IN*/
