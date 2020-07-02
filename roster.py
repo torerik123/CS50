@@ -8,7 +8,7 @@ def print_house(table):
 
         print(i["first"], end = ' ')
 
-        if i["middle"] != "NULL":
+        if i["middle"] != None:
             print(i["middle"], end = ', ')
 
         print(i["last"], end = ', ')
