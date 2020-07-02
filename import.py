@@ -48,7 +48,7 @@ else:
 
                 else:
 
-                    middle = "NULL"
+                    middle = "None"
 
                 # Add to dictionary
                 dict_houses.update({"first:": first, "middle": middle, "last:": last})
@@ -58,20 +58,15 @@ else:
 
                 house = "".join(row[1])
                 dict_houses["house"] = house
-                
+
 
             # birth year
             if row[2]:
 
                 birth = "".join(row[2])
                 dict_houses["birth"] = birth
-            
-            # Write to database        
+
+            # Write to database
             db.execute("INSERT INTO students(first, middle, last, house, birth) VALUES(?,?,?,?,?)",
             first, middle, last, house, birth)
             #print(dict_houses.values())
-
-    
-    
-    #db.execute("INSERT INTO students(first, middle, last) VALUES(?,?,?)",
-    #            first, middle, last)
