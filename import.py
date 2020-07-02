@@ -25,7 +25,7 @@ else:
         reader = csv.reader(names)
 
         #Skip first row
-        next(reader)
+        #next(reader)
 
         # Dictionary to store student info
         dict_houses = {"first:":"", "middle":"", "last:":"", "house":"", "birth":""}
