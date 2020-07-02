@@ -5,9 +5,11 @@ from sys import argv, exit
 # Define function that prints all names from a given house
 def print_house(table):
     for i in table:
+        
         print(i["first"], end = ' ')
+        
         if i["middle"] != "NULL":
-            print(i["middle"], end = ' ')
+            continue
 
         print(i["last"], end = ', ')
         print("born", i["birth"])
