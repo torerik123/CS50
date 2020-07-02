@@ -8,8 +8,8 @@ def print_house(table):
 
         print(i["first"], end = ' ')
 
-        if i["middle"] != "NULL":
-            continue
+        #if i["middle"] != "NULL":
+        #    continue
 
         print(i["last"], end = ', ')
         print("born", i["birth"])
@@ -17,6 +17,7 @@ def print_house(table):
 
 
 def main():
+    
     # Check for command line argument (house)
     if len(argv) != 2:
         print("Usage: python roster.py Gryffindor")
