@@ -9,7 +9,7 @@ open("students.db", "w").close()
 db = SQL("sqlite:///students.db")
 
 # Create table students in database students.db
-db.execute("CREATE TABLE students(first TEXT, Middle TEXT, Last TEXT, House TEXT, Birth NUMERIC)")
+db.execute("CREATE TABLE students(first TEXT, middle TEXT, last TEXT, house TEXT, birth NUMERIC)")
 
 # Check for command line arguments
 if len(argv) != 2:
@@ -28,7 +28,7 @@ else:
         next(reader)
 
         # Dictionary to store student info
-        dict_houses = {"first:":"", "middle":"", "Last:":"", "House":"", "Birth":""}
+        dict_houses = {"first:":"", "middle":"", "last:":"", "house":"", "birth":""}
 
         for row in reader:
 
@@ -51,26 +51,27 @@ else:
                     middle = "NULL"
 
                 # Add to dictionary
-                dict_houses.update({"first:": first, "Middle": middle, "Last:": last})
+                dict_houses.update({"first:": first, "middle": middle, "last:": last})
 
-            # Houses
+            # houses
             if row[1]:
 
                 house = "".join(row[1])
-                dict_houses["House"] = house
-                #db.execute("INSERT INTO students(House) VALUES(?)",
-                #house)
+                dict_houses["house"] = house
+                
 
-            # Birth year
+            # birth year
             if row[2]:
 
                 birth = "".join(row[2])
-                dict_houses["Birth"] = birth
-                #db.execute("INSERT INTO students(Birth) VALUES(?)",
-                #birth)
-            print(dict_houses.values())
+                dict_houses["birth"] = birth
+            
+            # Write to database        
+            db.execute("INSERT INTO students(first, middle, last, house, birth) VALUES(?,?,?,?,?)",
+            first, middle, last, house, birth)
+            #print(dict_houses.values())
 
-    # Write to database
     
-    #db.execute("INSERT INTO students(first, Middle, Last) VALUES(?,?,?)",
+    
+    #db.execute("INSERT INTO students(first, middle, last) VALUES(?,?,?)",
     #            first, middle, last)
