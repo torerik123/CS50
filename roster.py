@@ -8,8 +8,8 @@ def print_house(table):
 
         print(i["first"], end = ' ')
 
-        #if i["middle"] != "NULL":
-        #    continue
+        if i["middle"] != "NULL":
+            print(i["middle"], end = ', ')
 
         print(i["last"], end = ', ')
         print("born", i["birth"])
