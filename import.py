@@ -58,16 +58,16 @@ else:
 
                 house = "".join(row[1])
                 dict_houses["House"] = house
-                db.execute("INSERT INTO students(House) VALUES(?)",
-                house)
+                #db.execute("INSERT INTO students(House) VALUES(?)",
+                #house)
 
             # Birth year
             if row[2]:
 
                 birth = "".join(row[2])
                 dict_houses["Birth"] = birth
-                db.execute("INSERT INTO students(Birth) VALUES(?)",
-                birth)
+                #db.execute("INSERT INTO students(Birth) VALUES(?)",
+                #birth)
             print(dict_houses.values())
 
     # Write to database
