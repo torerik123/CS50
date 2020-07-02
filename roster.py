@@ -6,12 +6,12 @@ from sys import argv, exit
 def print_house(table):
     for i in table:
 
-        print(i["first"], end = ' ')
+        print(i["first"], end=' ')
 
         if i["middle"] != None:
-            print(i["middle"], end = ' ')
+            print(i["middle"], end=' ')
 
-        print(i["last"], end = ', ')
+        print(i["last"], end=', ')
         print("born", i["birth"])
     return
 
@@ -32,6 +32,7 @@ def main():
 
     # Print names of everyone in given house
     print_house(rows)
+
 
 if __name__ == '__main__':
     main()

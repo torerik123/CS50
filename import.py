@@ -26,11 +26,11 @@ def main():
         with open(csv_names, "r") as names:
             reader = csv.reader(names)
 
-            #Skip first row
+            # Skip first row
             next(reader)
 
             # Dictionary to store student info
-            dict_houses = {"first:":"", "middle":"", "last:":"", "house":"", "birth":""}
+            dict_houses = {"first:": "", "middle:": "", "last:": "", "house:": "", "birth:": ""}
 
             for row in reader:
 
@@ -69,7 +69,8 @@ def main():
 
                 # Write to database
                 db.execute("INSERT INTO students(first, middle, last, house, birth) VALUES(?,?,?,?,?)",
-                first, middle, last, house, birth)
+                           first, middle, last, house, birth)
+                            
 
 if __name__ == '__main__':
     main()
