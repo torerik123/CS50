@@ -48,7 +48,7 @@ else:
 
                 else:
 
-                    middle = "None"
+                    middle = ""
 
                 # Add to dictionary
                 dict_houses.update({"first:": first, "middle": middle, "last:": last})
