@@ -1,0 +1,94 @@
+
+/*INDEX.HTML*/
+.intro{
+  margin-top: 10px;
+  padding: 10px;
+}
+
+h1,h2,h3,p {
+    color:LightCyan;
+    text-align: center;
+}
+
+/*Portfolio boxes*/
+/* Flexbox parent element*/
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items:center;
+}
+
+.box {
+  border-style: outset;
+  display:inline-block;
+  width: 33.33%;
+  padding: 50px;
+  width: 300px;
+  background-color: honeydew
+}
+
+.boxtext {
+    color:black;
+    text-align: center;
+}
+
+.boxtext:hover {
+  color: Powderblue;
+  text-decoration: none;
+}
+
+.portfoliolink {
+  color: green;
+  text-decoration: none;
+}
+
+.portfoliolink:hover {
+  color: Powderblue;
+  text-decoration: none;
+}
+
+.abouttext {
+  padding:10px;
+  color:black;
+}
+
+/* Background image */
+body {
+  background-color: CadetBlue;;
+}
+
+.dark-mode {
+  background-color: black;
+}
+
+
+/*Centers the text content*/
+.content {
+  max-width: 500px;
+  margin: auto;
+  padding: 50px;
+  background-color: honeydew
+}
+
+/*Footer*/
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: honeydew;
+  color: black;
+  text-align: center;
+}
+
+.footertext {
+  color: black;
+  text-decoration: none;
+}
+
+.footertext:hover {
+  color: Powderblue;
+  text-decoration: none;
+
+
