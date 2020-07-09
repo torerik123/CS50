@@ -4,11 +4,9 @@
 int main(void)
 {
 
-    //Prompt user for credit card number
+    //  Prompt user for credit card number
 
     long number = get_long("Number:\n");
-
-    //TODO: Calculate checksum/Luhns algorithm:
 
     long slice = number;
     int remainder = 0;
@@ -19,8 +17,8 @@ int main(void)
     int x = 0;
     int y = 0;
     int sum = 0;                        //sum of the total modulo of the two do/while loops
-    long cardcheck = number;            //Used for counting length number
-    int counter = 0;                    //Used for counting length number
+    long cardcheck = number;            
+    int counter = 0;                    
     long startingnumber = number;
 
 
