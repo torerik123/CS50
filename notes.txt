@@ -1,0 +1,6 @@
+/sell
+- Add JS alert if input is not a positive integer
+
+/history
+
+/personal touch

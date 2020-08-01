@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+
+<table class="table table-striped">
+    <tr>
+        <th> Stock symbol</th>
+        <th> Stock name</th>
+        <th> Shares</th>
+        <th> Current Price</th>
+        <th> Total Value</th>
+    </tr>
+
+{% for row in rows %}
+    <tr>
+        <td>${{ row["symbol"] }}</td>
+        <td>${{ row["name"] }}</td>
+        <td>${{ row["SUM(shares)"]   }}</td>
+        <td>${{ row["price"] }}</td>
+        <td>${{ row["value"] }}</td>
+{% endfor %}
+
+         <tr>
+            <td>CASH</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>${{ cash_balance }}</td>
+        </tr>
+
+        <tfoot>
+            <tr>
+                <td colspan="4"></td>
+                <td><b>${{ total_value}}</b></td>
+            </tr>
+        </tfoot>
+    </tr>
+</table>
+
+{% endblock %}
