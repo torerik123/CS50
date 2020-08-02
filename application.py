@@ -51,7 +51,7 @@ def index():
     user_id=session["user_id"]
 
     # List of stocks
-    rows = db.execute("SELECT symbol, SUM(shares), price, name FROM portfolio WHERE user_id=:user_id GROUP BY symbol", user_id=user_id)
+    rows = db.execute("SELECT symbol, SUM(shares), price, name, total FROM portfolio WHERE user_id=:user_id GROUP BY symbol", user_id=user_id)
 
     # Get cash balance
     cash_rows = db.execute("SELECT cash FROM users WHERE id = :id", id=user_id)
@@ -60,13 +60,13 @@ def index():
     # Total value of all shares + cash holdings
     total_value = cash_balance
 
-    # Get total value shares for each stock
+    # Get total value of shares for each stock
     for row in rows:
-        # Add row "value" to rows and set it to the value of shares * price
-        row["value"] = row["SUM(shares)"] * row["price"]
-        total_value +=row["value"]
+        # Add row "value" to dict rows and set it to the value of shares * price, format price in usd
+        row["value"] = usd(row["SUM(shares)"] * row["price"])
+        row["price"] = usd(row["price"])
 
-    return render_template("index.html", rows=rows, total_value=usd(total_value), cash_balance=usd(cash_balance))
+    return render_template("index.html", rows=rows, cash_balance=usd(cash_balance))
 
 @app.route("/buy", methods=["GET", "POST"])
 @login_required
@@ -103,17 +103,20 @@ def buy():
                 return apology("You can't afford that many shares")
 
             # Store transaction records in database. Username, Stock, Shares, Price. Date and time is recorded automatically in database
-            db.execute("INSERT INTO portfolio (user_id, symbol, name, shares, price) VALUES (:user_id, :symbol, :name, :shares, :price)",
+            db.execute("INSERT INTO portfolio (user_id, symbol, name, shares, price, total) VALUES (:user_id, :symbol, :name, :shares, :price, :total)",
                     user_id = session['user_id'],
                     symbol = quote['symbol'],
                     name = quote['name'],
                     shares=shares,
-                    price=shareprice)
+                    price=shareprice,
+                    total=totalprice)
 
             new_balance = cash - totalprice
 
             # Update cash holdings
             db.execute("UPDATE users SET cash = :new_balance WHERE id = :id ", new_balance=new_balance, id=session['user_id'])
+
+            flash('Bought!')
 
         return redirect("/")
 
@@ -122,7 +125,16 @@ def buy():
 @login_required
 def history():
     """Show history of transactions"""
-    return apology("TODO")
+
+    user_id=session["user_id"]
+
+    transactions = db.execute("SELECT * FROM portfolio WHERE user_id=:user_id", user_id=user_id)
+
+    # Format in $usd
+    for row in transactions:
+        row["total"] = usd(row["price"] * row["shares"])
+
+    return render_template("history.html", transactions=transactions)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -204,6 +216,10 @@ def register():
     else:
         username = request.form.get("username")
         password = request.form.get("password")
+        password2 = request.form.get("password2")
+
+        if password != password2:
+            return apology("Passwords don't match")
 
         # Look for username in database
         check = db.execute("SELECT * FROM users WHERE username =:username",username=username)
@@ -228,37 +244,63 @@ def sell():
 
     user_id=session["user_id"]
 
-    # SELECT stocks that user owns
-    symbol = db.execute("SELECT symbol, shares FROM portfolio WHERE user_id=:user_id", user_id=user_id)
+    # List stocks in portfolio
+    symbol = db.execute("SELECT symbol, SUM(shares) FROM portfolio WHERE user_id=:user_id GROUP BY symbol", user_id=user_id)
 
     if request.method == "GET":
         return render_template("sell.html", symbol=symbol)
 
     else:
+        # Get input from form
         sell_symbol = request.form.get("symbol")
         sell_shares = int(request.form.get("shares"))
 
+        # Return apology if no input is provided
         if not sell_symbol:
             return apology("Missing symbol")
 
         if not sell_shares:
             return apology("Missing shares")
 
-        # Render apology if user does not have that many stocks in portfolio
-        shares_rows = db.execute("SELECT shares FROM portfolio WHERE user_id=:user_id AND symbol =:symbol", user_id=user_id, symbol=sell_symbol)
-        shares_owned = shares_rows[0]["shares"]
+        # Return apology if user does not have that many stocks in portfolio
+        shares_rows = db.execute("SELECT SUM(shares) FROM portfolio WHERE user_id=:user_id AND symbol =:symbol", user_id=user_id, symbol=sell_symbol)
+        shares_owned = shares_rows[0]["SUM(shares)"]
 
         if sell_shares > shares_owned:
             return apology("Too many shares")
 
-        new_total = ???
-        # Update portfolio
-        db.execute("UPDATE ")
+        else:
+        # Record transaction
+            # Lookup stock price
+            quote = lookup(sell_symbol)
+            shareprice = quote['price']
 
-UPDATE portfolio
-SET column1 = value1, column2 = value2, ...
-WHERE condition;
-    return render_template("sell.html")
+            totalprice = sell_shares * shareprice
+
+            # Add sell transaction to database
+            db.execute("INSERT INTO portfolio (user_id, symbol, name, shares, price, total) VALUES (:user_id, :sell_symbol, :name, :shares, :price, :total)",
+                        user_id = session['user_id'],
+                        sell_symbol = quote['symbol'],
+                        name = quote['name'],
+                        shares= -sell_shares,
+                        price=shareprice,
+                        total=totalprice
+
+                        )
+
+            # SELECT how much cash the user currently has in users
+            row = db.execute("SELECT cash FROM USERS WHERE id = :id", id=session["user_id"])
+            cash = float(row[0]["cash"])
+
+            # Update cash balance
+            totalprice = sell_shares * shareprice
+            new_balance = cash + totalprice
+
+            # Update cash holdings
+            db.execute("UPDATE users SET cash = :new_balance WHERE id = :id ", new_balance=new_balance, id=user_id)
+
+            flash('Sold!')
+    return redirect("/")
 
 
 def errorhandler(e):

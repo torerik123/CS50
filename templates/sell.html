@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Quote
+    Sell
 {% endblock %}
 
 {% block main %}
@@ -13,7 +13,13 @@
                 <option disabled selected value>Symbol</option>
 
                 {% for stock in symbol %}
-                <option value="{{stock["symbol"]}}">{{stock["symbol"]}}</option>
+
+                    {% if stock["SUM(shares)"] > 0 %}
+
+                    <option value="{{stock["symbol"]}}">{{stock["symbol"]}}</option>
+
+                    {% endif %}
+
                 {% endfor %}
             </select>
         </div>
@@ -25,6 +31,13 @@
         <button id="submit" class="btn btn-primary" type="submit">Sell</button>
     </form>
     <script>
+
+    <!--Make sure input is a positive integer-->
+    document.querySelector('#submit').onclick = function () {
+            if (document.querySelector('#shares').value < 0) {
+                alert("Value must be greater than or equal to 0.");
+            }
+        }
      </script>
 
 {% endblock %}
