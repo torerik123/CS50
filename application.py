@@ -85,11 +85,15 @@ def buy():
             return apology("Stock not found")
 
         else:
-            # Render an apology if the input is not a positive integer.
-            shares = int(request.form.get("shares"))
+            try:
+                # Render an apology if the input is not a positive integer.
+                shares = int(request.form.get("shares"))
 
-            if shares < 1:
-                return apology("Please enter a positive integer")
+                if shares < 1:
+                    return apology("Please enter a positive integer")
+
+            except ValueError:
+                return apology("Please enter an integer")
 
             # SELECT how much cash the user currently has in users
             row = db.execute("SELECT cash FROM USERS WHERE id = :id", id=session["user_id"])
@@ -251,9 +255,19 @@ def sell():
         return render_template("sell.html", symbol=symbol)
 
     else:
-        # Get input from form
-        sell_symbol = request.form.get("symbol")
-        sell_shares = int(request.form.get("shares"))
+        try:
+            # Get input from form
+            sell_symbol = request.form.get("symbol")
+            sell_shares = int(request.form.get("shares"))
+
+
+            # Error checking
+            if sell_shares < 1:
+                return apology("Please enter a positive integer")
+
+        # Render an apology if the input is not an integer.
+        except ValueError:
+            return apology("Please enter an integer")
 
         # Return apology if no input is provided
         if not sell_symbol:
@@ -261,6 +275,10 @@ def sell():
 
         if not sell_shares:
             return apology("Missing shares")
+
+        if sell_shares <= 0:
+            return render_template("sell.html", symbol=symbol)
+
 
         # Return apology if user does not have that many stocks in portfolio
         shares_rows = db.execute("SELECT SUM(shares) FROM portfolio WHERE user_id=:user_id AND symbol =:symbol", user_id=user_id, symbol=sell_symbol)
@@ -284,9 +302,7 @@ def sell():
                         name = quote['name'],
                         shares= -sell_shares,
                         price=shareprice,
-                        total=totalprice
-
-                        )
+                        total=totalprice)
 
             # SELECT how much cash the user currently has in users
             row = db.execute("SELECT cash FROM USERS WHERE id = :id", id=session["user_id"])
@@ -296,12 +312,11 @@ def sell():
             totalprice = sell_shares * shareprice
             new_balance = cash + totalprice
 
-            # Update cash holdings
+            # Update cash holdings in database
             db.execute("UPDATE users SET cash = :new_balance WHERE id = :id ", new_balance=new_balance, id=user_id)
 
             flash('Sold!')
-    return redirect("/")
-
+            return redirect("/")
 
 def errorhandler(e):
     """Handle error"""
