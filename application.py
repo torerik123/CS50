@@ -325,6 +325,69 @@ def errorhandler(e):
     return apology(e.name, e.code)
 
 
+@app.route("/settings", methods=["GET", "POST"])
+@login_required
+def settings():
+
+    #TODO
+
+    return render_template("settings.html")
+
+
+@app.route("/change_password", methods=["GET", "POST"])
+@login_required
+def change_password():
+
+    if request.method == "GET":
+        return render_template("changepassword.html")
+
+    else:
+
+            oldpassword = request.form.get("oldpassword")
+            newpassword = request.form.get("newpassword")
+            newpassword2 = request.form.get("newpassword2")
+
+            if newpassword != newpassword2:
+                return apology("Passwords don't match")
+
+            # Query database for old password
+            rows = db.execute("SELECT id, hash FROM users WHERE id=:id", id=session["user_id"])
+
+
+            # Ensure old password is correct
+
+            # Update password
+            #hash_pwd = generate_password_hash(password, method='pbkdf2:sha256', salt_length=8)
+
+            #db.execute("INSERT INTO users (username, hash) VALUES(?,?)",username,hash_pwd)
+
+            flash("Password changed!")
+            return redirect("/settings")
+
+
+@app.route("/cash", methods=["GET", "POST"])
+@login_required
+def cash():
+
+    if request.method == "GET":
+
+        # Show how much cash the user currently has
+        cash_rows = db.execute("SELECT cash FROM users WHERE id = :id", id=session["user_id"])
+        cash_balance = cash_rows[0]["cash"]
+
+
+        return render_template("cash.html", cash_balance=cash_balance)
+
+    else:
+            return redirect("/settings")
+
+
+
+
+
+
 # Listen for errors
 for code in default_exceptions:
     app.errorhandler(code)(errorhandler)
+
+

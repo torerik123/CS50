@@ -22,6 +22,11 @@ nav .navbar-brand .green
     color: #2e944b;
 }
 
+nav .navbar-brand .orange
+{
+    color:orange;
+}
+
 main .form-control
 {
     /* center form controls */
@@ -44,4 +49,14 @@ main img
 {
     /* constrain images on small screens */
     max-width: 100%;
+}
+
+body
+{
+
+}
+
+th, td, h2, h3
+{
+    color:black;
 }
