@@ -1,0 +1,14 @@
+/personal touch - At least one of the following:
+    - Allow users to change their passwords.
+
+    - Allow users to buy more shares or sell shares of stocks they already own via index itself, without having to type stocks’ symbols manually.
+        - - Fix JS popup
+
+- Change settings from navbar to settings-icon
+- Fix index table to display total value of all holdings
+
+- CSS:
+- Make page look like bloomberg terminal
+- Change background color to be dark, but not black
+- Change font on navbar
+- Make buy/sell buttons green and red
