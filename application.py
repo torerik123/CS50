@@ -369,17 +369,25 @@ def change_password():
 @login_required
 def cash():
 
+    # Show how much cash the user currently has
+    cash_rows = db.execute("SELECT cash FROM users WHERE id = :id", id=session["user_id"])
+    cash_balance = cash_rows[0]["cash"]
+
     if request.method == "GET":
-
-        # Show how much cash the user currently has
-        cash_rows = db.execute("SELECT cash FROM users WHERE id = :id", id=session["user_id"])
-        cash_balance = cash_rows[0]["cash"]
-
-
-        return render_template("cash.html", cash_balance=cash_balance)
+        return render_template("cash.html", cash_balance=usd(cash_balance))
 
     else:
-            return redirect("/settings")
+
+        # Get input from form
+        add_cash = int(request.form.get("addcash"))
+        new_balance = cash_balance + add_cash
+
+        # Update cash balance
+        db.execute("UPDATE users SET cash=:new_balance WHERE id = :id", new_balance=new_balance, id=session["user_id"])
+
+        # Flash message (" USD added to cash balance)
+        flash("Added " + str(usd(add_cash)) + " to cash balance ")
+        return redirect("/settings")
 
 
 
