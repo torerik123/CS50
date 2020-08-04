@@ -27,6 +27,16 @@ nav .navbar-brand .orange
     color:orange;
 }
 
+#buy:hover
+{
+    color:green;
+}
+
+#sell:hover
+{
+    color:red;
+}
+
 main .form-control
 {
     /* center form controls */

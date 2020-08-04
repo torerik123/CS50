@@ -120,7 +120,7 @@ def buy():
             # Update cash holdings
             db.execute("UPDATE users SET cash = :new_balance WHERE id = :id ", new_balance=new_balance, id=session['user_id'])
 
-            flash('Bought!')
+            flash("Bought " + str(shares) + " shares of " + quote['name'] + "!")
 
         return redirect("/")
 
@@ -315,7 +315,7 @@ def sell():
             # Update cash holdings in database
             db.execute("UPDATE users SET cash = :new_balance WHERE id = :id ", new_balance=new_balance, id=user_id)
 
-            flash('Sold!')
+            flash("Sold " + str(sell_shares) + " shares of " + quote['name'] + "!")
             return redirect("/")
 
 def errorhandler(e):
@@ -342,27 +342,38 @@ def change_password():
         return render_template("changepassword.html")
 
     else:
-
+            # Get input from form
             oldpassword = request.form.get("oldpassword")
             newpassword = request.form.get("newpassword")
             newpassword2 = request.form.get("newpassword2")
 
-            if newpassword != newpassword2:
-                return apology("Passwords don't match")
-
             # Query database for old password
             rows = db.execute("SELECT id, hash FROM users WHERE id=:id", id=session["user_id"])
+            old_password_hash = rows[0]["hash"]
 
+            # Generate hash from the old password input by the user
+            passwordhash = generate_password_hash(oldpassword, method='pbkdf2:sha256', salt_length=8)
 
-            # Ensure old password is correct
+            # Compare hashed password with hash in database
+            check_hash = check_password_hash(old_password_hash,oldpassword)
 
-            # Update password
-            #hash_pwd = generate_password_hash(password, method='pbkdf2:sha256', salt_length=8)
+            if check_hash == True:
 
-            #db.execute("INSERT INTO users (username, hash) VALUES(?,?)",username,hash_pwd)
+                if newpassword != newpassword2:
+                    return apology("Passwords don't match")
 
-            flash("Password changed!")
-            return redirect("/settings")
+                #Hash new password
+                new_password_hash = generate_password_hash(newpassword, method='pbkdf2:sha256', salt_length=8)
+
+                # Update database
+                db.execute("UPDATE users SET hash=:new_password_hash WHERE id =:id", new_password_hash=new_password_hash, id=session["user_id"])
+
+                flash("Password changed!")
+
+                return redirect("/")
+
+            else:
+                return apology("Wrong password!")
 
 
 @app.route("/cash", methods=["GET", "POST"])

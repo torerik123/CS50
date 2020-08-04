@@ -10,8 +10,9 @@
 
 <form action="/cash" method="post">
         <div class="form-group">
-            <input id="addcash" autocomplete="off" autofocus class="form-control" name="addcash" placeholder="$$$" type="number">
+            <input id="addcash" autocomplete="off" autofocus class="form-control" name="addcash" placeholder="$$$" type="number" min=1>
         </div>
         <button id="submit" class="btn btn-primary" type="submit">Add cash</button>
 </form>
+
 {% endblock %}
