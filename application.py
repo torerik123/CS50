@@ -66,7 +66,7 @@ def index():
         row["value"] = usd(row["SUM(shares)"] * row["price"])
         row["price"] = usd(row["price"])
 
-    return render_template("index.html", rows=rows, cash_balance=usd(cash_balance))
+    return render_template("index.html", rows=rows, cash_balance=usd(cash_balance), total_value=usd(total_value))
 
 @app.route("/buy", methods=["GET", "POST"])
 @login_required
@@ -390,16 +390,19 @@ def cash():
     else:
 
         # Get input from form
-        add_cash = int(request.form.get("addcash"))
-        new_balance = cash_balance + add_cash
+        try:
+            add_cash = int(request.form.get("addcash"))
+            new_balance = cash_balance + add_cash
 
-        # Update cash balance
-        db.execute("UPDATE users SET cash=:new_balance WHERE id = :id", new_balance=new_balance, id=session["user_id"])
+            # Update cash balance
+            db.execute("UPDATE users SET cash=:new_balance WHERE id = :id", new_balance=new_balance, id=session["user_id"])
 
-        # Flash message (" USD added to cash balance)
-        flash("Added " + str(usd(add_cash)) + " to cash balance ")
-        return redirect("/settings")
+            # Flash message (" USD added to cash balance)
+            flash("Added " + str(usd(add_cash)) + " to cash balance ")
+            return redirect("/settings")
 
+        except ValueError:
+            return apology("Wrong input")
 
 
 
