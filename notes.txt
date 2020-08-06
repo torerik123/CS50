@@ -1,12 +1,7 @@
-/personal touch - At least one of the following:
-
-    - Allow users to buy more shares or sell shares of stocks they already own via index itself, without having to type stocks’ symbols manually.
-        - - Fix JS popup
-
-- Fix styling on quote page
+- Add regex to register?
 
 GITHUB:
 
-- Implemented functions:
-- Added settings page where users can change passwords and add more cash
+- Implemented functions: register,  quote, buy, sell, index, history
+- Added settings page where users can change password and add more cash
 - Changed CSS

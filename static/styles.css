@@ -9,6 +9,7 @@ nav .navbar-brand .blue
 {
     color: #537fbe;
 }
+
 nav .navbar-brand .red
 {
     color: #ea433b;
@@ -35,6 +36,11 @@ nav .navbar-brand .orange
 #sell:hover
 {
     color:red;
+}
+
+#navhover:hover
+{
+    color:blue;
 }
 
 main .form-control
