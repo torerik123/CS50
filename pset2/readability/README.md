@@ -1,6 +1,6 @@
 # Readability
 
-Computes the approximate grade level needed to comprehend some text using the Coleman-Liau index.
+Computes the approximate grade level needed to comprehend some text using the [Coleman-Liau index.](https://en.wikipedia.org/wiki/Coleman%E2%80%93Liau_index)
 
 Example: 
 
