@@ -2,7 +2,7 @@
 
  Imports student data into a database, and then produces class rosters.
 
-Example:
+```
 $ python import.py characters.csv
 $ python roster.py Gryffindor
 
@@ -17,3 +17,4 @@ Dean Thomas, born 1980
 Romilda Vane, born 1981
 Ginevra Molly Weasley, born 1981
 Ronald Bilius Weasley, born 1980
+```
