@@ -1,6 +1,6 @@
 # Mario
 
- Prints out a half-pyramid of a specified height, per the below.
+ Prints out a half-pyramid of a specified height.
  
  Example:
  
