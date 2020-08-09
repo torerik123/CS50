@@ -328,9 +328,6 @@ def errorhandler(e):
 @app.route("/settings", methods=["GET", "POST"])
 @login_required
 def settings():
-
-    #TODO
-
     return render_template("settings.html")
 
 
